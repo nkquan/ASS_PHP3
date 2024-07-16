@@ -15,6 +15,9 @@ return new class extends Migration {
             $table->unsignedInteger('gio_hang_id');
             $table->unsignedInteger('san_pham_id');
             $table->integer('so_luong')->nullable();
+            $table->foreign('gio_hang_id')->references('id')->on('gio_hangs')->onDelete('cascade');
+            $table->foreign('san_pham_id')->references('id')->on('san_phams')->onDelete('cascade');
+
 
             $table->timestamps();
         });

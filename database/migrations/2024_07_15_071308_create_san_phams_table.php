@@ -24,6 +24,7 @@ return new class extends Migration
             $table->unsignedInteger('danh_muc_id');
             $table->boolean('trang_thai')->default(0);
             $table->timestamps();   
+            $table->foreign('danh_muc_id')->references('id')->on('danh_mucs')->onDelete('cascade');
         });
     }
 
