@@ -18,6 +18,8 @@ return new class extends Migration {
             $table->integer('so_luong');
             $table->double('thanh_tien', 8, 2);
             $table->timestamps();
+            $table->foreign('don_hang_id')->references('id')->on('don_hangs')->onDelete('cascade');
+            $table->foreign('san_pham_id')->references('id')->on('san_phams')->onDelete('cascade');
         });
     }
 

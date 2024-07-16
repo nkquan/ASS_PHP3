@@ -15,6 +15,8 @@ return new class extends Migration
             $table->increments('id');
             $table->unsignedInteger('tai_khoan_id');
             $table->timestamps();
+            $table->foreign('tai_khoan_id')->references('id')->on('tai_khoans')->onDelete('cascade');
+
         });
     }
 
