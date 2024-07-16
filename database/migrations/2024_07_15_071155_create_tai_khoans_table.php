@@ -21,7 +21,7 @@ return new class extends Migration
             $table->boolean('gioi_tinh');
             $table->string('dia_chi');
             $table->string('mat_khau');
-            $table->integer('chuc_vu_id');
+            $table->unsignedInteger('chuc_vu_id');
             $table->boolean('trang_thai');
             $table->timestamps();
             $table->foreign('chuc_vu_id')->references('id')->on('chuc_vus')->onDelete('cascade');

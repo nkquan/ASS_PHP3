@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('hinh_anh_san_phams', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->unsignedInteger('san_pham_id');
+            $table->string('link_hinh_anh');
             $table->timestamps();
         });
     }

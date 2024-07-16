@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('phuong_thuc_thanh_toans', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->string('ten_phuong_thuc');
             $table->timestamps();
         });
     }
