@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('danh_mucs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('ten_danh_muc');
-            $table->text('mo_ta');
+            $table->string('ten_danh_muc')->unique();
+            $table->string('hinh_anh');
             $table->timestamps();
         });
     }

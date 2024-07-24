@@ -19,8 +19,8 @@ return new class extends Migration
             $table->date('ngay_dang');
             $table->boolean('trang_thai')->default(0);
             $table->timestamps();
-            $table->foreign('san_pham_id')->references('id')->on('san_phams')->onDelete('cascade');
-            $table->foreign('tai_khoan_id')->references('id')->on('tai_khoans')->onDelete('cascade');
+            $table->foreign('san_pham_id')->references('id')->on('san_phams');
+            $table->foreign('tai_khoan_id')->references('id')->on('tai_khoans');
         });
     }
 

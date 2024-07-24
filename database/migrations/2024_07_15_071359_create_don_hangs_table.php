@@ -19,13 +19,13 @@ return new class extends Migration {
             $table->string('sdt_nguoi_nhan');
             $table->string('dia_chi_nguoi_nhan');
             $table->date('ngay_dat');
-            $table->double('tong_tien', 8, 2);
-            $table->text('ghi_chu');
+            $table->double('tong_tien');
+            $table->string('ghi_chu');
             $table->unsignedInteger('phuong_thuc_thanh_toan_id');
             $table->boolean('trang_thai')->default(0);
             $table->timestamps();
-            $table->foreign('phuong_thuc_thanh_toan_id')->references('id')->on('phuong_thuc_thanh_toans')->onDelete('cascade');
-            $table->foreign('tai_khoan_id')->references('id')->on('tai_khoans')->onDelete('cascade');
+            $table->foreign('phuong_thuc_thanh_toan_id')->references('id')->on('phuong_thuc_thanh_toans');
+            $table->foreign('tai_khoan_id')->references('id')->on('tai_khoans');
         });
     }
 
