@@ -13,18 +13,19 @@ return new class extends Migration
     {
         Schema::create('san_phams', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('ma_san_pham')->unique();
             $table->string('ten_san_pham');
-            $table->double('gia_san_pham',8,2);
-            $table->double('gia_khuyen_mai',8,2);
-            $table->text('hinh_anh');
-            $table->integer('so_luong')->nullable();
-            $table->integer('luot_xem');
+            $table->double('gia_san_pham');
+            $table->double('gia_khuyen_mai');
+            $table->string('hinh_anh')->nullable();
+            $table->unsignedInteger('so_luong');
+            $table->unsignedBigInteger('luot_xem')->default(0);
             $table->date('ngay_nhap');
-            $table->text('mo_ta')->nullable();
+            $table->string('mo_ta')->nullable();
             $table->unsignedInteger('danh_muc_id');
             $table->boolean('trang_thai')->default(0);
             $table->timestamps();   
-            $table->foreign('danh_muc_id')->references('id')->on('danh_mucs')->onDelete('cascade');
+            $table->foreign('danh_muc_id')->references('id')->on('danh_mucs');
         });
     }
 

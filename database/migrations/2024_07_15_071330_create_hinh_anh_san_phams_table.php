@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedInteger('san_pham_id');
             $table->string('link_hinh_anh');
             $table->timestamps();
-            $table->foreign('san_pham_id')->references('id')->on('san_phams')->onDelete('cascade');
+            $table->foreign('san_pham_id')->references('id')->on('san_phams');
         });
     }
 
