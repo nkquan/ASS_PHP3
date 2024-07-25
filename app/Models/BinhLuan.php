@@ -21,6 +21,6 @@ class BinhLuan extends Model
         return $this->hasOne(SanPham::class);
     }
     public function user () {
-        return $this->hasOne(User::class);
+        return $this->hasOne(User::class, 'id', 'tai_khoan_id');
     }
 }
