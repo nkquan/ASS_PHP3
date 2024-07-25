@@ -102,9 +102,9 @@
                         </a>
                     </li>
                     <li class="list-group-item px-0 py-0 sidebar-item mb-3 has-children border-0">
-                        <a href="#"
+                        <a href="{{route('danhmucs.index')}}"
                             class="text-heading text-decoration-none lh-1 d-flex sidebar-link align-items-center py-5 px-6 position-relative"
-                            data-bs-toggle="collapse" aria-expanded="false" title="Products">
+                             title="Products">
                             <span class="sidebar-item-icon d-inline-block w-40px text-muted">
                                 <i class="fa-solid fa-layer-group"></i>
                             </span>
@@ -114,7 +114,7 @@
                     <li class="list-group-item px-0 py-0 sidebar-item mb-3 has-children border-0">
                         <a href="#product"
                             class="text-heading text-decoration-none lh-1 d-flex sidebar-link align-items-center py-5 px-6 position-relative"
-                            data-bs-toggle="collapse" aria-expanded="false" title="Products">
+                             title="Products">
                             <span class="sidebar-item-icon d-inline-block w-40px text-muted">
                                 <i class="fas fa-shopping-bag"></i>
                             </span>
@@ -124,7 +124,7 @@
                     <li class="list-group-item px-0 py-0 sidebar-item mb-3 has-children border-0">
                         <a href="#order"
                             class="text-heading text-decoration-none lh-1 d-flex sidebar-link align-items-center py-5 px-6 position-relative"
-                            data-bs-toggle="collapse" aria-expanded="false" title="Order">
+                             title="Order">
                             <span class="sidebar-item-icon d-inline-block w-40px text-muted">
                                 <i class="fas fa-shopping-cart"></i>
                             </span>
@@ -134,7 +134,7 @@
                     <li class="list-group-item px-0 py-0 sidebar-item mb-3 has-children border-0">
                         <a href="#account"
                             class="text-heading text-decoration-none lh-1 d-flex sidebar-link align-items-center py-5 px-6 position-relative"
-                            data-bs-toggle="collapse" aria-expanded="false" title="Account">
+                             title="Account">
                             <span class="sidebar-item-icon d-inline-block w-40px text-muted">
                                 <i class="fas fa-user"></i>
                             </span>
