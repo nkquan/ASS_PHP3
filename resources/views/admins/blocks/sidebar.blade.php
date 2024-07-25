@@ -92,7 +92,7 @@
                 </form>
                 <ul class="list-group list-group-flush list-group-no-border w-100 p-6">
                     <li class="list-group-item px-0 py-0 sidebar-item mb-3 border-0">
-                        <a href="dashboard.html"
+                        <a href="{{ route('admin.dashboard') }}"
                             class="text-heading text-decoration-none lh-1 sidebar-link py-5 px-6 d-flex align-items-center"
                             title="Dashboard">
                             <span class="sidebar-item-icon w-40px d-inline-block text-muted">
