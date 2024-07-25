@@ -6,13 +6,10 @@
     <div class="dashboard-page-content">
         <div class="row mb-9 align-items-center justify-content-between">
             <div class="col-md-6 mb-8 mb-md-0">
-                <h2 class="fs-4 mb-0">Product List</h2>
-                <p>Lorem ipsum dolor sit amet.</p>
+                <h2 class="fs-4 mb-0">Danh Mục Sản Phẩm</h2>
             </div>
             <div class="col-md-6 d-flex flex-wrap justify-content-md-end">
-                <a href="#" class="btn btn-primary">
-                    Create new
-                </a>
+                <a href="{{ route('danhmucs.create') }}" class="btn btn-primary">Thêm Danh Mục</a>
             </div>
         </div>
         <div class="card mb-4 rounded-4 p-7">
@@ -44,62 +41,50 @@
             </div>
             <div class="card-body px-0 pt-7 pb-0">
                 <div class="table-responsive">
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                        </div>
+                    @endif
                     <table class="table table-hover align-middle table-nowrap mb-0">
-                        <tbody>
+                        <thead>
                             <tr>
-                                <td class="text-center">
-                                    <div class="form-check">
-                                        <input class="form-check-input rounded-0 ms-0" type="checkbox"
-                                            id="transactionCheck-0">
-                                        <label class="form-check-label" for="transactionCheck-0"></label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="d-flex align-items-center flex-nowrap">
-                                        <a href="../shop/product-details-v1.html" title="Flowers cotton dress">
-                                            <img src="#" data-src="../assets/images/products/product-03-75x100.jpg"
-                                                alt="Flowers cotton dress" class="lazy-image" width="60" height="80">
-                                        </a>
-                                        <a href="../shop/product-details-v1.html" title="Flowers cotton dress"
-                                            class="ms-6">
-                                            <p class="fw-semibold text-body-emphasis mb-0">Flowers
-                                                cotton dress</p>
-                                        </a>
-                                    </div>
-                                </td>
-                                <td>$44.25</td>
-                                <td>
-                                    <span
-                                        class="badge rounded-lg rounded-pill alert py-3 px-4 mb-0 alert-success border-0 text-capitalize fs-12">Active</span>
-                                </td>
-                                <td>02.11.2021</td>
-                                <td class="text-center">
-                                    <div class="d-flex flex-nowrap justify-content-center">
-                                        <a href="add-product-1.html"
-                                            class="btn btn-primary py-4 px-5 btn-xs fs-13px me-4"><i
-                                                class="far fa-pen me-2"></i> Edit</a>
-                                        <a href="#"
-                                            class="btn btn-outline-primary btn-hover-bg-danger btn-hover-border-danger btn-hover-text-light py-4 px-5 fs-13px btn-xs me-4"><i
-                                                class="far fa-trash me-2"></i> Delete</a>
-                                    </div>
-                                </td>
+                                <th>#</th>
+                                <th>Hình Ảnh</th>
+                                <th>Tên Danh Mục</th>
+                                <th>Hành Động</th>
                             </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($listDanhMuc as $index => $item)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>
+                                        <img src="{{ Storage::Url($item->hinh_anh) }}" alt="" width="100px">
+                                    </td>
+                                    <td>{{ $item->ten_danh_muc }}</td>
+                                    <td>
+                                        <a href="{{ route('danhmucs.edit', $item->id) }}"
+                                            class="btn btn-primary py-4 px-5 btn-xs fs-13px me-4"><i
+                                                class="far fa-pen me-2"></i> Sửa</a>
+                                        <form action="{{ route('danhmucs.destroy', $item->id) }}" method="POST"
+                                            class="d-inline" onsubmit="return confirm('Bạn có muốn xóa không')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button href="#"
+                                                class="btn btn-outline-primary btn-hover-bg-danger btn-hover-border-danger btn-hover-text-light py-4 px-5 fs-13px btn-xs me-4"><i
+                                                    class="far fa-trash me-2"></i> Xóa</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
+
                     </table>
                 </div>
             </div>
         </div>
-        <nav aria-label="Page navigation example" class="mt-6 mb-4">
-            <ul class="pagination justify-content-start">
-                <li class="page-item active mx-3"><a class="page-link" href="#">01</a></li>
-                <li class="page-item mx-3"><a class="page-link" href="#">02</a></li>
-                <li class="page-item mx-3"><a class="page-link" href="#">03</a></li>
-                <li class="page-item mx-3"><a class="page-link dot" href="#">...</a></li>
-                <li class="page-item mx-3"><a class="page-link" href="#">16</a></li>
-                <li class="page-item mx-3">
-                    <a class="page-link" href="#"><i class="far fa-chevron-right"></i></a>
-                </li>
-            </ul>
-        </nav>
     </div>
+    {{ $listDanhMuc->links('pagination::bootstrap-5') }}
 @endsection
