@@ -18,7 +18,6 @@ use App\Http\Controllers\Admin\DanhMucController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('danhmucs',DanhMucController::class);
 
 Route::get('login', [AuthController::class, 'showLogin'])->name('login.index');
 Route::post('login', [AuthController::class, 'login'])->name('login');
@@ -29,6 +28,11 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('home', function () {
     return view('clients.home');
 });
-Route::get('admin/dashboard', function () {
-    return view('admins.dashboard');
-})->name('admin.dashboard');
+
+
+Route::middleware(['auth', 'auth.admin'])->prefix('admin')->group(function () {
+    Route::get('dashboard', function () {
+        return view('admins.dashboard');
+    })->name('admin.dashboard');
+    Route::resource('danhmucs', DanhMucController::class);
+});
