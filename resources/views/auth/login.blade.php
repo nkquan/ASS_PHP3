@@ -9,12 +9,13 @@
                 <div>
                     <div class="login-reg-form-wrap">
                         <h5>Sign In</h5>
-                        <form action="#" method="post">
+                        <form action="{{ route('login') }}" method="post">
+                            @csrf
                             <div class="single-input-item">
-                                <input type="email" placeholder="Email or Username" required />
+                                <input type="email" name="email" placeholder="Email or Username"/>
                             </div>
                             <div class="single-input-item">
-                                <input type="password" placeholder="Enter your Password" required />
+                                <input type="password" name="password" placeholder="Enter your Password"/>
                             </div>
                             <div class="single-input-item">
                                 <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
@@ -28,7 +29,7 @@
                                 </div>
                             </div>
                             <div class="single-input-item">
-                                <button class="btn btn-sqr">Login</button>
+                                <button type="submit" class="btn btn-sqr">Login</button>
                             </div>
                         </form>
                     </div>

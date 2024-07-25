@@ -17,11 +17,11 @@ return new class extends Migration
             $table->string('anh_dai_dien')->nullable();
             $table->date('ngay_sinh')->nullable();
             $table->string('email')->unique();
-            $table->string('so_dien_thoai');
-            $table->boolean('gioi_tinh')->default(0);
-            $table->string('dia_chi');
-            $table->string('mat_khau');
-            $table->unsignedInteger('chuc_vu_id');
+            $table->string('so_dien_thoai')->nullable();
+            $table->boolean('gioi_tinh')->nullable();
+            $table->string('dia_chi')->nullable();
+            $table->string('password');
+            $table->unsignedInteger('chuc_vu_id')->default(2);
             $table->boolean('trang_thai')->default(0);
             $table->timestamps();
             $table->foreign('chuc_vu_id')->references('id')->on('chuc_vus');
