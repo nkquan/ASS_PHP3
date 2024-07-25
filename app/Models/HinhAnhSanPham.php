@@ -5,13 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Slider extends Model
+class HinhAnhSanPham extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'tieu_de',
-        'mo_ta',
-        'hinh_anh',
+        'san_pham_id',
+        'link_hinh_anh',
     ];
+
+    public function sanPham () {
+        return $this->belongsTo(SanPham::class);
+    }
 }
