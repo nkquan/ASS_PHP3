@@ -1,44 +1,6 @@
-<header class="header-area header-wide bg-gray">
+<header class="header-area header-wide border-bottom">
     <!-- main header start -->
     <div class="main-header d-none d-lg-block">
-        <!-- header top start -->
-        <div class="header-top bdr-bottom">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <div class="welcome-message">
-                            <p>Welcome to Corano Jewelry online store</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 text-right">
-                        <div class="header-top-settings">
-                            <ul class="nav align-items-center justify-content-end">
-                                <li class="curreny-wrap">
-                                    $ Currency
-                                    <i class="fa fa-angle-down"></i>
-                                    <ul class="dropdown-list curreny-list">
-                                        <li><a href="#">$ USD</a></li>
-                                        <li><a href="#">€ EURO</a></li>
-                                    </ul>
-                                </li>
-                                <li class="language">
-                                    <img src="{{ asset('assets/client') }}/img/icon/en.png" alt="flag"> English
-                                    <i class="fa fa-angle-down"></i>
-                                    <ul class="dropdown-list">
-                                        <li><a href="#"><img src="{{ asset('assets/client') }}/img/icon/en.png"
-                                                    alt="flag"> english</a></li>
-                                        <li><a href="#"><img src="{{ asset('assets/client') }}/img/icon/fr.png"
-                                                    alt="flag"> french</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- header top end -->
-
         <!-- header middle area start -->
         <div class="header-main-area sticky">
             <div class="container">
@@ -47,7 +9,7 @@
                     <!-- start logo area -->
                     <div class="col-lg-2">
                         <div class="logo">
-                            <a href="index-2.html">
+                            <a href="{{ route('home.index') }}">
                                 <img src="{{ asset('assets/client') }}/img/logo/logo.png" alt="brand logo">
                             </a>
                         </div>
@@ -61,16 +23,19 @@
                                 <!-- main menu navbar start -->
                                 <nav class="desktop-menu">
                                     <ul>
-                                        <li class="active"><a href="index.html">Trang chủ</a>
+                                        <li class="active"><a href="{{ route('home.index') }}">Trang chủ</a>
                                         </li>
-                                        <li><a href="index.html">Sản phẩm <i class="fa fa-angle-down"></i></a>
+                                        <li><a href="{{ route('home.product') }}">Sản phẩm<i class="fa fa-angle-down"></i></a>
                                             <ul class="dropdown">
-                                                <li><a href="index.html">Home version 01</a></li>
-                                                <li><a href="index-2.html">Home version 02</a></li>
-                                                <li><a href="index-3.html">Home version 03</a></li>
-                                                <li><a href="index-4.html">Home version 04</a></li>
-                                                <li><a href="index-5.html">Home version 05</a></li>
-                                                <li><a href="index-6.html">Home version 06</a></li>
+                                                @foreach ($danhMucHome as $item)
+                                                    <li>
+                                                        <div class="d-flex">
+                                                            <img src="{{ Storage::Url($item->hinh_anh) }}" alt=""
+                                                                width="30">
+                                                            <a href="{{ route('home.category', $item->id) }}">{{ $item->ten_danh_muc }}</a>
+                                                        </div>
+                                                    </li>
+                                                @endforeach
                                             </ul>
                                         </li>
                                         <li><a href="contact-us.html">Liên hệ</a></li>
@@ -107,19 +72,12 @@
                                                 <li>
                                                     <form action="{{ route('logout') }}" method="post">
                                                         @csrf
-                                                        <button type="submit"><a>logout</a></button>
+                                                        <button type="submit"><a>Đăng xuất</a></button>
                                                     </form>
                                                 </li>
                                             @else
-                                                <li><a href="{{ route('login') }}">login</a></li>
-                                                <li><a href="{{ route('register') }}">register</a></li>
-                                                <li><a href="my-account.html">my account</a></li>
-                                                <li>
-                                                    <form action="{{ route('logout') }}" method="post">
-                                                        @csrf
-                                                        <button type="submit"><a>logout</a></button>
-                                                    </form>
-                                                </li>
+                                                <li><a href="{{ route('login') }}">Đăng nhập</a></li>
+                                                <li><a href="{{ route('register') }}">Đăng kí</a></li>
                                             @endif
                                         </ul>
                                     </li>

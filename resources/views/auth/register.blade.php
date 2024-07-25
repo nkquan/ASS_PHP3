@@ -1,7 +1,6 @@
 @extends('layouts.client')
 
 @section('content')
-{{ auth()->user() }}
     <div class="login-register-wrapper section-padding">
         <div class="container">
             <div class="member-area-from-wrap">
@@ -9,17 +8,19 @@
                     <!-- Register Content Start -->
                     <div>
                         <div class="login-reg-form-wrap sign-up-form">
-                            <h5>Singup Form</h5>
+                            <h5>Đăng kí</h5>
                             <form action="{{ route('register') }}" method="post">
                                 @csrf
                                 <div class="single-input-item">
-                                    <input type="text" name="ho_ten" placeholder="Full Name" />
+                                    <input type="text" class="@error('ho_ten') is-invalid @enderror" name="ho_ten"
+                                        value="{{ old('ho_ten') }}" placeholder="Full Name" />
                                     @error('ho_ten')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="single-input-item">
-                                    <input type="email" name="email" placeholder="Enter your Email" />
+                                    <input type="email" class="@error('email') is-invalid @enderror" name="email"
+                                        value="{{ old('email') }}" placeholder="Enter your Email" />
                                     @error('email')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -27,7 +28,8 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="single-input-item">
-                                            <input type="password" name="password" placeholder="Enter your Password" />
+                                            <input type="password" class="@error('passowrd') is-invalid @enderror"
+                                                name="password" placeholder="Enter your Password" />
                                             @error('passowrd')
                                                 <p class="text-danger">{{ $message }}</p>
                                             @enderror
@@ -35,8 +37,8 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="single-input-item">
-                                            <input type="password" name="confirmpassword"
-                                                placeholder="Repeat your Password" />
+                                            <input type="password" class="@error('confirmpassword') is-invalid @enderror"
+                                                name="confirmpassword" placeholder="Repeat your Password" />
                                             @error('confirmpassowrd')
                                                 <p class="text-danger">{{ $message }}</p>
                                             @enderror

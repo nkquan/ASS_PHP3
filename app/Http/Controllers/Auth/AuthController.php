@@ -16,15 +16,29 @@ class AuthController extends Controller
     }
     public function login(Request $request)
     {
+        $request->validate(
+            [
+                'email' => 'required|email',
+                'password' => 'required|min:6',
+            ],
+            [
+                'email.required' => 'Bắt buộc nhập.',
+                'email.email' => 'Email sai định dạng.',
+                'password.required' => 'Bắt buộc nhập.',
+                'password.min' => 'Mật khẩu ít nhất 6 kí tự.',
+            ]
+        );
+        if ($request->isMethod('POST')) {
             $user = $request->only('email', 'password');
             if (auth()->attempt($user)) {
                 if (auth()->user()->chuc_vu_id === 1) {
                     return redirect()->route('admin.dashboard');
                 }
-                return redirect('home');
-            }else {
+                return redirect()->route('home.index');
+            } else {
                 return redirect()->route('login');
             }
+        }
     }
     public function showRegister()
     {
@@ -39,7 +53,16 @@ class AuthController extends Controller
                 'password' => 'required|min:6',
                 'confirmpassword' => 'required|same:password'
             ],
-            []
+            [
+                'ho_ten.required' => 'Bắt buộc nhập.',
+                'email.required' => 'Bắt buộc nhập.',
+                'email.email' => 'Email sai định dạng.',
+                'email.unique' => 'Email đã tồn tại.',
+                'password.required' => 'Bắt buộc nhập.',
+                'password.min' => 'Mật khẩu ít nhất 6 kí tự.',
+                'confirmpassword.required' => 'Bắt buộc nhập.',
+                'confirmpassword.same' => 'Mật khẩu phải giống nhau'
+            ]
         );
         if ($request->isMethod('POST')) {
             $user = User::create([
@@ -47,8 +70,8 @@ class AuthController extends Controller
                 'email' => $request->email,
                 'password' => $request->password,
             ]);
-            // Auth::login($user);
-            return redirect()->route('login');
+            Auth::login($user);
+            return redirect()->route('home.index');
         }
     }
     public function logout()

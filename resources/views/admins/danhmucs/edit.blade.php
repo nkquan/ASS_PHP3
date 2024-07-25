@@ -54,3 +54,25 @@
         </div>
     </div>
 @endsection
+
+@section('js')
+<script>
+    function showImage(event){
+        const img_danh_muc = document.getElementById('img_danh_muc');
+        
+
+        const file = event.target.files[0];
+
+        const reader = new FileReader();
+
+        reader.onload=function(){
+            img_danh_muc.src = reader.result;
+            img_danh_muc.style.display = 'block';
+        }
+        if(file){
+            reader.readAsDataURL(file)
+        }
+    }
+</script>
+    
+@endsection
