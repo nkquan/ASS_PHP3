@@ -3,8 +3,10 @@
 use App\Models\SanPham;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\DanhMucController;
 use App\Http\Controllers\Admin\SanPhamController;
+use App\Http\Controllers\Client\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +19,12 @@ use App\Http\Controllers\Admin\SanPhamController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class,'index'])->name('home.index');
+Route::get('product', [HomeController::class,'sanPhamAll'])->name('home.product');
+Route::get('product/{id}', [HomeController::class,'sanPhamDetail'])->name('home.detail');
+Route::get('product/category/{id}', [HomeController::class,'sanPhamDanhMuc'])->name('home.category');
+Route::post('product/comment/{id}', [HomeController::class,'postComment'])->name('home.comment');
+Route::delete('product/comment/{id}', [HomeController::class,'deleteBinhLuan'])->name('home.deleteBL');
 
 Route::get('login', [AuthController::class, 'showLogin'])->name('login.index');
 Route::post('login', [AuthController::class, 'login'])->name('login');
@@ -27,16 +32,13 @@ Route::get('register', [AuthController::class, 'showRegister'])->name('register.
 Route::post('register', [AuthController::class, 'register'])->name('register');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('home', function () {
-    return view('clients.home');
-});
-
 
 Route::middleware(['auth', 'auth.admin'])->prefix('admin')->group(function () {
     Route::get('dashboard', function () {
         return view('admins.dashboard');
     })->name('admin.dashboard');
     Route::resource('danhmucs', DanhMucController::class);
+    Route::resource('sliders', SliderController::class);
     Route::resource('sanphams', SanPhamController::class);
 });
 
