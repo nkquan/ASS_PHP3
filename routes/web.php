@@ -1,8 +1,10 @@
 <?php
 
+use App\Models\SanPham;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\DanhMucController;
+use App\Http\Controllers\Admin\SanPhamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +37,6 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admin')->group(function () {
         return view('admins.dashboard');
     })->name('admin.dashboard');
     Route::resource('danhmucs', DanhMucController::class);
+    Route::resource('sanphams', SanPhamController::class);
 });
+
