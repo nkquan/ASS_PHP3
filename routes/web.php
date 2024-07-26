@@ -1,9 +1,11 @@
 <?php
 
+use App\Models\SanPham;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\DanhMucController;
+use App\Http\Controllers\Admin\SanPhamController;
 use App\Http\Controllers\Client\HomeController;
 
 /*
@@ -37,4 +39,6 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admin')->group(function () {
     })->name('admin.dashboard');
     Route::resource('danhmucs', DanhMucController::class);
     Route::resource('sliders', SliderController::class);
+    Route::resource('sanphams', SanPhamController::class);
 });
+

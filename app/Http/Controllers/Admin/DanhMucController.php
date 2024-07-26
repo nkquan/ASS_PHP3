@@ -36,7 +36,7 @@ class DanhMucController extends Controller
             $param = $request->except('_token');
 
             if ($request->hasFile('hinh_anh')) {
-                $filepath = $request->file('hinh_anh')->store('uploads/đanhmucs', 'public');
+                $filepath = $request->file('hinh_anh')->store('uploads/danhmucs', 'public');
             } else {
                 $filepath = null;
             }
