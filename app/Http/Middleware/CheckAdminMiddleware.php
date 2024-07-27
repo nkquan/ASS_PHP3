@@ -19,6 +19,6 @@ class CheckAdminMiddleware
         if(Auth::check() && Auth::user()->chuc_vu_id === 1) {
             return $next($request);
         }
-        abort(403);
+        return redirect()->route('home.index');
     }
 }

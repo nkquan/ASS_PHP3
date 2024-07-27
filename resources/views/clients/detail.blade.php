@@ -35,14 +35,14 @@
                                 <div class="col-lg-5">
                                     <div class="product-large-slider">
                                         <div class="pro-large-img img-zoom">
-                                            <img src="{{ asset('assets/client') }}/img/product/product-details-img1.jpg"
+                                            <img src="{{ Storage::url($sanPham->hinh_anh) }}"
                                                 alt="product-details" />
                                         </div>
                                     </div>
                                     <div class="pro-nav slick-row-10 slick-arrow-style">
                                         @foreach ($sanPham->hinhAnhSanPham as $item)
                                             <div class="pro-nav-thumb">
-                                                <img src="assets/img/product/product-details-img1.jpg"
+                                                <img src="{{ Storage::url($item->link_hinh_anh) }}"
                                                     alt="product-details" />
                                             </div>
                                         @endforeach
@@ -192,7 +192,7 @@
                                 <div class="product-item">
                                     <figure class="product-thumb">
                                         <a href="{{ route('home.detail', $item->id) }}">
-                                            <img src="{{ asset('assets/client') }}/img/product/product-11.jpg"
+                                            <img src="{{ Storage::url($item->hinh_anh) }}"
                                                 alt="product">
                                         </a>
                                         <div class="product-badge">
