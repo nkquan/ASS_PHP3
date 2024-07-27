@@ -80,14 +80,14 @@
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="trang_thai"
                                                     id="gridRadios1" value="1" checked>
-                                                <label class="form-check-label text success" for="gridRadios1">
+                                                <label class="form-check-label text-success" for="gridRadios1">
                                                     Hiển Thị
                                                 </label>
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="trang_thai"
-                                                    id="gridRadios2" value="0" checked>
-                                                <label class="form-check-label text danger" for="gridRadios2">
+                                                    id="gridRadios2" value="0">
+                                                <label class="form-check-label text-danger" for="gridRadios2">
                                                     Ẩn
                                                 </label>
                                             </div>

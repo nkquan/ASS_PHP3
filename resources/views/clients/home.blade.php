@@ -66,7 +66,7 @@
                                             <div class="product-item">
                                                 <figure class="product-thumb">
                                                     <a href="{{ route('home.detail', $item->id) }}">
-                                                        <img src="{{ asset('assets/client') }}/img/product/product-1.jpg"
+                                                        <img src="{{ Storage::url($item->hinh_anh) }}"
                                                             alt="product">
                                                         {{-- <img class="sec-img"
                                                             src="{{ asset('assets/client') }}/img/product/product-18.jpg"
@@ -197,7 +197,7 @@
                                 <div class="product-item">
                                     <figure class="product-thumb">
                                         <a href="{{ route('home.detail', $item->id) }}">
-                                            <img src="{{ asset('assets/client') }}/img/product/product-6.jpg"
+                                            <img src="{{ Storage::url($item->hinh_anh) }}"
                                                 alt="product">
                                             {{-- <img class="sec-img"
                                                 src="{{ asset('assets/client') }}/img/product/product-13.jpg"

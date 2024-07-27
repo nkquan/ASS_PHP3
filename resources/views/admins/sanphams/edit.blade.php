@@ -76,14 +76,28 @@
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
+
                                     <div class="mb-3">
-                                        <label for="trang_thai">Trạng thái</label>
-                                        <label for="form-label">
-                                            <input type="radio" name="trang_thai" value="0"> Ẩn
-                                        </label>
-                                        <label for="form-label">
-                                            <input type="radio" name="trang_thai" value="1"> Hiện
-                                        </label>
+                                        <label for="trang_thai" class="form-label">Trạng thái</label>
+                                        <div class="col-sm-10 mb-3 d-flex gap-2">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="trang_thai"
+                                                    id="gridRadios1" value="1"
+                                                    {{ $sanPham->trang_thai == 1 ? 'checked' : '' }}>
+                                                <label class="form-check-label text-success" for="gridRadios1">
+                                                    Hiển Thị
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="trang_thai"
+                                                    id="gridRadios2" value="0"
+                                                    {{ $sanPham->trang_thai == 0 ? 'checked' : '' }}>
+                                                <label class="form-check-label text-danger" for="gridRadios2">
+                                                    Ẩn
+                                                </label>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
 
@@ -126,6 +140,33 @@
                                         <img id="img_danh_muc" src="{{ Storage::Url($sanPham->hinh_anh) }}"
                                             alt="hình ảnh sản phẩm" style="width: 100px;">
                                     </div>
+
+                                    <div class="mb-3">
+                                        <label for="hinh_anh" class="form-label">Album hình ảnh</label>
+                                        <i id="add-row" class="fas fa-plus ms-2" style="cursor: pointer;"></i>
+                                        </i>
+                                        <table class="table-align-middle table-nowrap mb-0">
+                                            <tbody id="image-table-body">
+                                                @foreach ($sanPham->hinhAnhSanPham as $index => $hinhAnh)
+                                                    <tr>
+                                                        <td class="d-flex align-items-center">
+                                                            <img id="preview_{{ $index }}"
+                                                                src="{{ Storage::url($hinhAnh->link_hinh_anh) }}"
+                                                                alt="hình ảnh sản phẩm" style="width: 50px;"
+                                                                class="me-5">
+                                                            <input type="file" id="hinh_anh"
+                                                                name="list_hinh_anh[{{ $hinhAnh->id }}]" class="form-control mb-2"
+                                                                onchange="previewImage(this,{{ $index }})">
+                                                                <input type="hidden" name="list_hinh_anh[{{ $hinhAnh->id }}]" value="{{ $hinhAnh->id }}">
+                                                        </td>
+                                                        <td>
+                                                            <i class="far fa-trash ms-2" style="cursor: pointer;" onclick="removeRow(this)"></i>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <button type="submit" class="btn btn-primary">Cập nhật</button>
@@ -157,6 +198,54 @@
             if (file) {
                 reader.readAsDataURL(file)
             }
+        }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var rowCount = {{ count($sanPham->hinhAnhSanPham) }};
+
+            document.getElementById('add-row').addEventListener('click', function() {
+                var tableBody = document.getElementById('image-table-body')
+
+                var newRow = document.createElement('tr');
+
+                newRow.innerHTML = `
+                    <td class="d-flex align-items-center">
+                        <img id="preview_${rowCount}"
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkx9WATkc9Q2kr7A_KyTAMY0HQl4sDUX66Z58tsZT22DXyFO6i2US-Gyk725EmpaMZCT4&usqp=CAU"
+                            alt="hình ảnh sản phẩm" style="width: 50px;" class="me-5">
+                        <input type="file" id="hinh_anh" name="list_hinh_anh[id_${rowCount}]"
+                            class="form-control mb-2" onchange="previewImage(this,${rowCount})">
+                    </td>
+                    <td>
+                        <i 
+                            class="far fa-trash ms-2" style="cursor: pointer;"onclick="removeRow(this)">
+                        </i>
+                    </td>
+                `;
+
+                tableBody.appendChild(newRow);
+                rowCount++;
+            })
+        });
+
+        function previewImage(input, rowIndex) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    document.getElementById(`preview_${rowIndex}`).setAttribute('src', e.target.result)
+                }
+
+                reader.readAsDataURL(input.files[0])
+            }
+        }
+
+        function removeRow(item) {
+            var row = item.closest('tr');
+
+            row.remove();
         }
     </script>
 @endsection

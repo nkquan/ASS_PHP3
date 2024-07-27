@@ -73,8 +73,8 @@
                                     <td>{{number_format( $item->gia_san_pham) }}</td>
                                     <td>{{empty($item->gia_khuyen_mai)? 0 : number_format($item->gia_khuyen_mai) }}</td>
                                     <td>{{ $item->so_luong }}</td>
-                                    <td class="{{ $item->tranh_thai == true ? 'text-success' : 'text-danger' }}">
-                                        {{ $item->tranh_thai == true ? 'Hiển thị' : 'Ẩn' }}
+                                    <td class="{{ $item->trang_thai == 1 ? 'text-success' : 'text-danger' }}">
+                                        {{ $item->trang_thai == 1 ? 'Hiển thị' : 'Ẩn' }}
                                     </td>
                                     <td>
                                         <a href="{{ route('sanphams.edit', $item->id) }}"
@@ -84,7 +84,7 @@
                                             class="d-inline" onsubmit="return confirm('Bạn có muốn xóa không')">
                                             @csrf
                                             @method('DELETE')
-                                            <button href="#"
+                                            <button 
                                                 class="btn btn-outline-primary btn-hover-bg-danger btn-hover-border-danger btn-hover-text-light py-4 px-5 fs-13px btn-xs me-4"><i
                                                     class="far fa-trash me-2"></i> Xóa</button>
                                         </form>
