@@ -87,9 +87,9 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#" class="minicart-btn">
+                                        <a href="{{route('cart.list')}}" class="minicart-btn">
                                             <i class="pe-7s-shopbag"></i>
-                                            <div class="notification">2</div>
+                                            <div class="notification">{{ session('cart') ? count(session('cart')) : '0' }}</div>
                                         </a>
                                     </li>
                                 </ul>

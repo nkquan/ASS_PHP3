@@ -70,15 +70,19 @@
                                             <span>{{ $sanPham->so_luong }} sản phẩm</span>
                                         </div>
                                         <p class="pro-desc">{{ $sanPham->mo_ta }}</p>
-                                        <div class="quantity-cart-box d-flex align-items-center">
-                                            <h6 class="option-title">Số lượng:</h6>
-                                            <div class="quantity">
-                                                <div class="pro-qty"><input type="text" value="1"></div>
+                                        <form action="{{ route('cart.add')}}" method="POST">
+                                            @csrf
+                                            <div class="quantity-cart-box d-flex align-items-center">
+                                                <h6 class="option-title">Số lượng:</h6>
+                                                <div class="quantity">
+                                                    <div class="pro-qty"><input type="text" value="1" name="quantity" id="quantityInput"></div>
+                                                    <input type="hidden" name="product_id" value="{{ $sanPham->id }}">
+                                                </div>
+                                                <div class="action_link">
+                                                    <button type="submit" class="btn btn-cart2">Thêm vào giỏ hàng</button type="submit">
+                                                </div>
                                             </div>
-                                            <div class="action_link">
-                                                <a class="btn btn-cart2" href="#">Thêm vào giỏ hàng</a>
-                                            </div>
-                                        </div>
+                                        </form>
                                         <div class="like-icon">
                                             <a class="facebook" href="#"><i class="fa fa-facebook"></i>like</a>
                                             <a class="twitter" href="#"><i class="fa fa-twitter"></i>tweet</a>
@@ -172,68 +176,97 @@
         </div>
         <!-- page main wrapper end -->
         <!-- related products area start -->
-        @if (empty($sanPhamCungLoai))
-            <section class="related-products section-padding">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <!-- section title start -->
-                            <div class="section-title text-center">
-                                <h2 class="title">Sản phẩm cùng loại</h2>
-                            </div>
-                            <!-- section title start -->
+        <section class="related-products section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- section title start -->
+                        <div class="section-title text-center">
+                            <h2 class="title">Sản phẩm cùng loại</h2>
                         </div>
+                        <!-- section title start -->
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="product-carousel-4 slick-row-10 slick-arrow-style">
-                                @foreach ($sanPhamCungLoai as $item)
-                                    <!-- product item start -->
-                                    <div class="product-item">
-                                        <figure class="product-thumb">
-                                            <a href="{{ route('home.detail', $item->id) }}">
-                                                <img src="{{ Storage::url($item->hinh_anh) }}" alt="product">
-                                            </a>
-                                            <div class="product-badge">
-                                                <div class="product-label new">
-                                                    <span>new</span>
-                                                </div>
-                                            </div>
-                                            <div class="button-group">
-                                                <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                    title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                                <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                    title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                                <a href="#" data-bs-toggle="modal"
-                                                    data-bs-target="#quick_view"><span data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Quick View"><i
-                                                            class="pe-7s-search"></i></span></a>
-                                            </div>
-                                            <div class="cart-hover">
-                                                <button class="btn btn-cart">Thêm vào giỏ hàng</button>
-                                            </div>
-                                        </figure>
-                                        <div class="product-caption text-center">
-                                            <h6 class="product-name">
-                                                <a
-                                                    href="{{ route('home.detail', $item->id) }}">{{ $item->ten_san_pham }}</a>
-                                            </h6>
-                                            <div class="price-box">
-                                                <span
-                                                    class="price-regular">{{ $item->gia_khuyen_mai ? number_format($item->gia_khuyen_mai, 0, '', '.') : '' }}<sup>đ</sup></span>
-                                                <span
-                                                    class="price-old"><del>{{ number_format($item->gia_san_pham, 0, '', '.') }}<sup>đ</sup></del></span>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="product-carousel-4 slick-row-10 slick-arrow-style">
+                            @foreach ($sanPhamCungLoai as $item)
+                                <!-- product item start -->
+                                <div class="product-item">
+                                    <figure class="product-thumb">
+                                        <a href="{{ route('home.detail', $item->id) }}">
+                                            <img src="{{ Storage::url($item->hinh_anh) }}"
+                                                alt="product">
+                                        </a>
+                                        <div class="product-badge">
+                                            <div class="product-label new">
+                                                <span>new</span>
                                             </div>
                                         </div>
+                                        <div class="button-group">
+                                            <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left"
+                                                title="Add to wishlist"><i class="pe-7s-like"></i></a>
+                                            <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
+                                                title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
+                                                    data-bs-toggle="tooltip" data-bs-placement="left"
+                                                    title="Quick View"><i class="pe-7s-search"></i></span></a>
+                                        </div>
+                                        <div class="cart-hover">
+                                            <button class="btn btn-cart">Thêm vào giỏ hàng</button>
+                                        </div>
+                                    </figure>
+                                    <div class="product-caption text-center">
+                                        <h6 class="product-name">
+                                            <a href="{{ route('home.detail', $item->id) }}">{{ $item->ten_san_pham }}</a>
+                                        </h6>
+                                        <div class="price-box">
+                                            <span
+                                                class="price-regular">{{ $item->gia_khuyen_mai ? number_format($item->gia_khuyen_mai, 0, '', '.') : '' }}<sup>đ</sup></span>
+                                            <span
+                                                class="price-old"><del>{{ number_format($item->gia_san_pham, 0, '', '.') }}<sup>đ</sup></del></span>
+                                        </div>
                                     </div>
-                                @endforeach
-                                <!-- product item end -->
-                            </div>
+                                </div>
+                            @endforeach
+                            <!-- product item end -->
                         </div>
                     </div>
                 </div>
-            </section>
-        @endif
+            </div>
+        </section>
         <!-- related products area end -->
     </main>
+@endsection
+
+@section('js')
+    <script>
+        $('.pro-qty').prepend('<span class="dec qtybtn">-</span>');
+        $('.pro-qty').append('<span class="inc qtybtn">+</span>');
+        $('.qtybtn').on('click', function() {
+            var $button = $(this);
+            var $input = $button.parent().find('input')
+            var oldValue = parseFloat($input.val());
+
+            if($button.hasClass('inc')){
+                var newVal = oldValue + 1;
+            }else{
+                if(oldValue >1){
+                    var newVal = oldValue - 1;
+                }else{
+                    var newVal = 1;
+                }
+            }
+            $input.val(newVal);
+        });
+
+        $('#quantityInput').on('change', function() {
+            var value = parseInt($(this).val(), 10);
+
+            if(isNaN(value) || value < 1 ){
+                alert('Số lượng phải lớn hơn bằng 1')
+                $(this).val(1)
+            }
+        })
+    </script>
 @endsection
