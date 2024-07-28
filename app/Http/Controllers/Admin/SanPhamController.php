@@ -104,10 +104,11 @@ class SanPhamController extends Controller
                 $param['hinh_anh'] = $sanPham->hinh_anh;
             }
 
-            
-                $currentImages = $sanPham->hinhAnhSanPham->pluck('id')->toArray();
-                $arrayCombine = array_combine($currentImages, $currentImages);
 
+            $currentImages = $sanPham->hinhAnhSanPham->pluck('id')->toArray();
+            $arrayCombine = array_combine($currentImages, $currentImages);
+
+            if ($request->list_hinh_anh) {
                 foreach ($arrayCombine as $key => $value) {
                     if (!array_key_exists($key, $request->list_hinh_anh)) {
                         $hinhAnhSanPham = HinhAnhSanPham::query()->find($key);
@@ -139,8 +140,7 @@ class SanPhamController extends Controller
                         ]);
                     }
                 }
-            
-
+            }
             $sanPham->update($param);
         }
         return redirect()->route('sanphams.index')->with('success', 'Cập nhật sản phẩm thành công');

@@ -22,7 +22,10 @@ class HomeController extends Controller
 
     public function sanPhamDetail (string $id) {
         $sanPham = SanPham::findOrFail($id);
-        $sanPhamCungLoai = SanPham::where('danh_muc_id', $sanPham->danh_muc_id)->get();
+        $sanPhamCungLoai = SanPham::where([
+            ['danh_muc_id', $sanPham->danh_muc_id],
+            ['id', '<>', $id]
+        ])->get();
         $binhLuans = BinhLuan::get();
         $sanPham->update([
             'luot_xem' => $sanPham->luot_xem + 1,
@@ -30,8 +33,24 @@ class HomeController extends Controller
         return view('clients.detail', compact('sanPham', 'sanPhamCungLoai', 'binhLuans'));
     }
 
-    public function sanPhamAll () {
-        $sanPhams = SanPham::paginate(15);
+    public function sanPhamAll (Request $request) {
+        $price = $request->price;
+        if ($price) {
+            if ($price == 1) {
+                $sanPhams = SanPham::where('gia_khuyen_mai', '<=', 10000000)->paginate(15);
+            } elseif ($price == 2) {
+                $sanPhams = SanPham::where([
+                    ['gia_khuyen_mai', '>', 10000000],
+                    ['gia_khuyen_mai', '<=', 20000000],
+                ])->paginate(15);
+            } else {
+                $sanPhams = SanPham::where('gia_khuyen_mai', '>', 20000000)->paginate(15);
+            }
+        } else {
+            $sanPhams = SanPham::when($request->search, function ($query, $search) {
+                return $query->where('ten_san_pham', 'like', "%$search%");
+            })->paginate(15);
+        }
         return view('clients.sanpham', compact('sanPhams'));
     }
     public function sanPhamDanhMuc (string $id) {

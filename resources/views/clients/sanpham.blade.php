@@ -35,7 +35,7 @@
                         <aside class="sidebar-wrapper">
                             <!-- single sidebar start -->
                             <div class="sidebar-single">
-                                <h5 class="sidebar-title">categories</h5>
+                                <h5 class="sidebar-title">Danh mục</h5>
                                 <div class="sidebar-body">
                                     <ul class="shop-categories">
                                         @foreach ($danhMucHome as $item)
@@ -52,19 +52,23 @@
 
                             <!-- single sidebar start -->
                             <div class="sidebar-single">
-                                <h5 class="sidebar-title">price</h5>
+                                <h5 class="sidebar-title">Giá</h5>
                                 <div class="sidebar-body">
                                     <div class="price-range-wrap">
-                                        <div class="price-range" data-min="1" data-max="1000"></div>
-                                        <div class="range-slider">
-                                            <form action="#" class="d-flex align-items-center justify-content-between">
+                                        {{-- <div class="range-slider"> --}}
+                                            <form action="{{ route('home.product') }}" method="GET" class="d-flex align-items-center justify-content-between">
+                                                @csrf
                                                 <div class="price-input">
-                                                    <label for="amount">Price: </label>
-                                                    <input type="text" id="amount">
+                                                    <select name="price" id="">
+                                                        <option value="0">--Giá--</option>
+                                                        <option value="1">từ 0 - 10 triệu</option>
+                                                        <option value="2">từ 10 triệu - 20 triệu</option>
+                                                        <option value="3">trên 20 triệu</option>
+                                                    </select>
                                                 </div>
-                                                <button class="filter-btn">filter</button>
+                                                <button type="submit" class="btn btn-secondary p-2">Lọc</button>
                                             </form>
-                                        </div>
+                                        {{-- </div> --}}
                                     </div>
                                 </div>
                             </div>
@@ -115,7 +119,7 @@
                                         <div class="product-item">
                                             <figure class="product-thumb">
                                                 <a href="{{ route('home.detail', $item->id) }}">
-                                                    <img src="{{ asset('assets/client') }}/img/product/product-1.jpg"
+                                                    <img src="{{ Storage::Url($item->hinh_anh) }}"
                                                         alt="product">
                                                 </a>
                                                 <div class="product-badge">

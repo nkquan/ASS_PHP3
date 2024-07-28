@@ -3,10 +3,11 @@
 use App\Models\SanPham;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\DanhMucController;
 use App\Http\Controllers\Admin\SanPhamController;
-use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Client\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,10 @@ Route::get('product/{id}', [HomeController::class,'sanPhamDetail'])->name('home.
 Route::get('product/category/{id}', [HomeController::class,'sanPhamDanhMuc'])->name('home.category');
 Route::post('product/comment/{id}', [HomeController::class,'postComment'])->name('home.comment');
 Route::delete('product/comment/{id}', [HomeController::class,'deleteBinhLuan'])->name('home.deleteBL');
+
+Route::get('account', [AccountController::class, 'showAccount'])->name('home.account');
+Route::put('account/{id}', [AccountController::class, 'editAccount'])->name('home.editAccount');
+Route::put('account/password/{id}', [AccountController::class, 'editAccountPwd'])->name('home.editAccountPwd');
 
 Route::get('login', [AuthController::class, 'showLogin'])->name('login.index');
 Route::post('login', [AuthController::class, 'login'])->name('login');

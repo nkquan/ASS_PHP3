@@ -23,9 +23,9 @@
                                 <!-- main menu navbar start -->
                                 <nav class="desktop-menu">
                                     <ul>
-                                        <li class="active"><a href="{{ route('home.index') }}">Trang chủ</a>
+                                        <li class="{{ request()->is('/') ? 'active' : '' }}"><a href="{{ route('home.index') }}">Trang chủ</a>
                                         </li>
-                                        <li><a href="{{ route('home.product') }}">Sản phẩm<i class="fa fa-angle-down"></i></a>
+                                        <li class="{{ request()->is('product') ? 'active' : '' }}"><a href="{{ route('home.product') }}">Sản phẩm<i class="fa fa-angle-down"></i></a>
                                             <ul class="dropdown">
                                                 @foreach ($danhMucHome as $item)
                                                     <li>
@@ -52,12 +52,11 @@
                         <div
                             class="header-right d-flex align-items-center justify-content-xl-between justify-content-lg-end">
                             <div class="header-search-container">
-                                <button class="search-trigger d-xl-none d-lg-block"><i
-                                        class="pe-7s-search"></i></button>
-                                <form class="header-search-box d-lg-none d-xl-block">
-                                    <input type="text" placeholder="Search entire store hire"
+                                <form action="{{ route('home.product') }}" method="GET" class="header-search-box d-lg-none d-xl-block">
+                                    @csrf
+                                    <input type="text" name="search" placeholder="Tìm kiếm..."
                                         class="header-search-field bg-white">
-                                    <button class="header-search-btn"><i class="pe-7s-search"></i></button>
+                                    <button type="submit" class="header-search-btn"><i class="pe-7s-search"></i></button>
                                 </form>
                             </div>
                             <div class="header-configure-area">
@@ -68,7 +67,7 @@
                                         </a>
                                         <ul class="dropdown-list">
                                             @if (auth()->user())
-                                                <li><a href="my-account.html">my account</a></li>
+                                                <li><a href="{{ route('home.account') }}">my account</a></li>
                                                 <li>
                                                     <form action="{{ route('logout') }}" method="post">
                                                         @csrf
