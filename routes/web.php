@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\ChucVuController;
+use App\Http\Controllers\Client\CartController;
 use App\Models\SanPham;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
@@ -26,6 +28,10 @@ Route::get('product/category/{id}', [HomeController::class,'sanPhamDanhMuc'])->n
 Route::post('product/comment/{id}', [HomeController::class,'postComment'])->name('home.comment');
 Route::delete('product/comment/{id}', [HomeController::class,'deleteBinhLuan'])->name('home.deleteBL');
 
+Route::get('/list-cart', [CartController::class,'listCart'])->name('cart.list');
+Route::post('/add-to-cart', [CartController::class,'addCart'])->name('cart.add');
+Route::post('/update-cart', [CartController::class,'updateCart'])->name('cart.update');
+
 Route::get('login', [AuthController::class, 'showLogin'])->name('login.index');
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::get('register', [AuthController::class, 'showRegister'])->name('register.index');
@@ -40,5 +46,6 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admin')->group(function () {
     Route::resource('danhmucs', DanhMucController::class);
     Route::resource('sliders', SliderController::class);
     Route::resource('sanphams', SanPhamController::class);
+    Route::resource('chucvus', ChucVuController::class);
 });
 

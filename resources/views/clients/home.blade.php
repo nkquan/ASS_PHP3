@@ -92,9 +92,14 @@
                                                                 data-bs-placement="left" title="Quick View"><i
                                                                     class="pe-7s-search"></i></span></a>
                                                     </div>
-                                                    <div class="cart-hover">
-                                                        <button class="btn btn-cart">add to cart</button>
-                                                    </div>
+                                                    <form action="{{ route('cart.add')}}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="quantity" value="1">
+                                                        <input type="hidden" name="product_id" value="{{ $item->id }}">
+                                                        <div class="cart-hover">
+                                                            <button class="btn btn-cart">Thêm vào giỏ hàng</button>
+                                                        </div>
+                                                    </form>
                                                 </figure>
                                                 <div class="product-caption text-center">
                                                     <h6 class="product-name">
@@ -220,9 +225,14 @@
                                                     data-bs-toggle="tooltip" data-bs-placement="left"
                                                     title="Quick View"><i class="pe-7s-search"></i></span></a>
                                         </div>
-                                        <div class="cart-hover">
-                                            <button class="btn btn-cart">Thêm vào giỏ hàng</button>
-                                        </div>
+                                        <form action="{{ route('cart.add')}}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="quantity" value="1">
+                                            <input type="hidden" name="product_id" value="{{ $item->id }}">
+                                            <div class="cart-hover">
+                                                <button class="btn btn-cart">Thêm vào giỏ hàng</button>
+                                            </div>
+                                        </form>
                                     </figure>
                                     <div class="product-caption text-center">
                                         <h6 class="product-name">
