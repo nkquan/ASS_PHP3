@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\Admin\ChucVuController;
-use App\Http\Controllers\Client\CartController;
 use App\Models\SanPham;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Admin\ChucVuController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\DanhMucController;
 use App\Http\Controllers\Admin\SanPhamController;
+use App\Http\Controllers\Admin\TaiKhoanController;
 use App\Http\Controllers\Client\AccountController;
 
 /*
@@ -51,5 +52,6 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admin')->group(function () {
     Route::resource('sliders', SliderController::class);
     Route::resource('sanphams', SanPhamController::class);
     Route::resource('chucvus', ChucVuController::class);
+    Route::resource('taikhoans', TaiKhoanController::class);
 });
 
