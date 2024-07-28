@@ -1,14 +1,16 @@
 <?php
 
-use App\Http\Controllers\Admin\ChucVuController;
-use App\Http\Controllers\Client\CartController;
 use App\Models\SanPham;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Client\CartController;
+use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Admin\ChucVuController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\DanhMucController;
 use App\Http\Controllers\Admin\SanPhamController;
-use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Admin\TaiKhoanController;
+use App\Http\Controllers\Client\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,9 @@ Route::get('product/category/{id}', [HomeController::class,'sanPhamDanhMuc'])->n
 Route::post('product/comment/{id}', [HomeController::class,'postComment'])->name('home.comment');
 Route::delete('product/comment/{id}', [HomeController::class,'deleteBinhLuan'])->name('home.deleteBL');
 
+Route::get('account', [AccountController::class, 'showAccount'])->name('home.account');
+Route::put('account/{id}', [AccountController::class, 'editAccount'])->name('home.editAccount');
+Route::put('account/password/{id}', [AccountController::class, 'editAccountPwd'])->name('home.editAccountPwd');
 Route::get('/list-cart', [CartController::class,'listCart'])->name('cart.list');
 Route::post('/add-to-cart', [CartController::class,'addCart'])->name('cart.add');
 Route::post('/update-cart', [CartController::class,'updateCart'])->name('cart.update');
@@ -47,5 +52,6 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admin')->group(function () {
     Route::resource('sliders', SliderController::class);
     Route::resource('sanphams', SanPhamController::class);
     Route::resource('chucvus', ChucVuController::class);
+    Route::resource('taikhoans', TaiKhoanController::class);
 });
 

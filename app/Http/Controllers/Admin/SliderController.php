@@ -78,7 +78,7 @@ class SliderController extends Controller
                 if ($slider->hinh_anh && Storage::disk('public')->exists($slider->hinh_anh)) {
                     Storage::disk('public')->delete($slider->hinh_anh);
                 }
-                $filepath = $request->file('hinh_anh')->store('upload/slider', 'public');
+                $filepath = $request->file('hinh_anh')->store('uploads/slider', 'public');
             } else {
                 $filepath = $slider->hinh_anh;
             }

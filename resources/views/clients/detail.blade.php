@@ -144,7 +144,7 @@
                                                                     </h4>
                                                                     <p>{{ $binhluan->noi_dung }}</p>
                                                                 </div>
-                                                                @if (auth()->user()->id === $binhluan->tai_khoan_id)
+                                                                @if (auth()->check() && auth()->user()->id === $binhluan->tai_khoan_id)
                                                                     <div class="col-2">
                                                                         <form
                                                                             action="{{ route('home.deleteBL', $binhluan->id) }}"
@@ -195,7 +195,8 @@
                                 <div class="product-item">
                                     <figure class="product-thumb">
                                         <a href="{{ route('home.detail', $item->id) }}">
-                                            <img src="{{ Storage::url($item->hinh_anh) }}" alt="product">
+                                            <img src="{{ Storage::url($item->hinh_anh) }}"
+                                                alt="product">
                                         </a>
                                         <div class="product-badge">
                                             <div class="product-label new">
@@ -211,14 +212,9 @@
                                                     data-bs-toggle="tooltip" data-bs-placement="left"
                                                     title="Quick View"><i class="pe-7s-search"></i></span></a>
                                         </div>
-                                        <form action="{{ route('cart.add')}}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="quantity" value="1">
-                                            <input type="hidden" name="product_id" value="{{ $item->id }}">
-                                            <div class="cart-hover">
-                                                <button class="btn btn-cart">Thêm vào giỏ hàng</button>
-                                            </div>
-                                        </form>
+                                        <div class="cart-hover">
+                                            <button class="btn btn-cart">Thêm vào giỏ hàng</button>
+                                        </div>
                                     </figure>
                                     <div class="product-caption text-center">
                                         <h6 class="product-name">

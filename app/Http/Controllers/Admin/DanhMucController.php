@@ -79,7 +79,7 @@ class DanhMucController extends Controller
                 if ($danhMuc->hinh_anh && Storage::disk('public')->exists($danhMuc->hinh_anh)) {
                     Storage::disk('public')->delete($danhMuc->hinh_anh);
                 }
-                $filepath = $request->file('hinh_anh')->store('upload/danhmucs', 'public');
+                $filepath = $request->file('hinh_anh')->store('uploads/danhmucs', 'public');
             } else {
                 $filepath = $danhMuc->hinh_anh;
             }

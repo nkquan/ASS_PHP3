@@ -16,6 +16,9 @@
 
     <!-- CSS
  ============================================ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,900" rel="stylesheet">
     <!-- Bootstrap CSS -->
@@ -158,10 +161,8 @@
                                     <div class="like-icon">
                                         <a class="facebook" href="#"><i class="fa fa-facebook"></i>like</a>
                                         <a class="twitter" href="#"><i class="fa fa-twitter"></i>tweet</a>
-                                        <a class="pinterest" href="#"><i
-                                                class="fa fa-pinterest"></i>save</a>
-                                        <a class="google" href="#"><i
-                                                class="fa fa-google-plus"></i>share</a>
+                                        <a class="pinterest" href="#"><i class="fa fa-pinterest"></i>save</a>
+                                        <a class="google" href="#"><i class="fa fa-google-plus"></i>share</a>
                                     </div>
                                 </div>
                             </div>
@@ -187,8 +188,7 @@
                             <li class="minicart-item">
                                 <div class="minicart-thumb">
                                     <a href="product-details.html">
-                                        <img src="{{ asset('assets/client') }}/img/cart/cart-1.jpg"
-                                            alt="product">
+                                        <img src="{{ asset('assets/client') }}/img/cart/cart-1.jpg" alt="product">
                                     </a>
                                 </div>
                                 <div class="minicart-content">
@@ -205,8 +205,7 @@
                             <li class="minicart-item">
                                 <div class="minicart-thumb">
                                     <a href="product-details.html">
-                                        <img src="{{ asset('assets/client') }}/img/cart/cart-2.jpg"
-                                            alt="product">
+                                        <img src="{{ asset('assets/client') }}/img/cart/cart-2.jpg" alt="product">
                                     </a>
                                 </div>
                                 <div class="minicart-content">
