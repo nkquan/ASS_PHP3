@@ -136,7 +136,7 @@
                             class="text-heading text-decoration-none lh-1 d-flex sidebar-link align-items-center py-5 px-6 position-relative"
                             title="Products">
                             <span class="sidebar-item-icon d-inline-block w-40px text-muted">
-                                <i class="fas fa-shopping-bag"></i>
+                                <i class="fa-solid fa-location-dot"></i>
                             </span>
                             <span class="sidebar-item-text fs-14px fw-semibold">Chức vụ</span>
                         </a>

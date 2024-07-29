@@ -38,12 +38,12 @@
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th class="pro-thumbnail">Thumbnail</th>
-                                                <th class="pro-title">Product</th>
-                                                <th class="pro-price">Price</th>
-                                                <th class="pro-quantity">Quantity</th>
-                                                <th class="pro-subtotal">Total</th>
-                                                <th class="pro-remove">Remove</th>
+                                                <th class="pro-thumbnail">HÌnh Ảnh</th>
+                                                <th class="pro-title">Sản Phẩm</th>
+                                                <th class="pro-price">GIá</th>
+                                                <th class="pro-quantity">Số lượng</th>
+                                                <th class="pro-subtotal">Tổng tiền</th>
+                                                <th class="pro-remove">Hành Động</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -104,30 +104,30 @@
                             @if(!empty($item['gia']))
                                 <div class="cart-calculator-wrapper">
                                     <div class="cart-calculate-items">
-                                        <h6>Cart Totals</h6>
+                                        <h6>Đơn hàng</h6>
                                         <div class="table-responsive">
                                             <table class="table">
                                                 <tr>
-                                                    <td>Sub Total</td>
+                                                    <td>Tổng đơn hàng</td>
                                                     <td class="sub-total">
                                                         {{ $item['gia'] ? number_format($subTotal, 0, '', '.') : '' }} đ
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Shipping</td>
+                                                    <td>Phí ship</td>
                                                     <td class="shipping">
                                                         {{ $item['gia'] ? number_format($shipping, 0, '', '.') : '' }} đ
                                                     </td>
                                                 </tr>
                                                 <tr class="total">
-                                                    <td>Total</td>
+                                                    <td>Tổng tiền</td>
                                                     <td class="total-amount">
                                                         {{ $item['gia'] ? number_format($total, 0, '', '.') : '' }} đ</td>
                                                 </tr>
                                             </table>
                                         </div>
                                     </div>
-                                    <a href="checkout.html" class="btn btn-sqr d-block">Proceed Checkout</a>
+                                    <a href="checkout.html" class="btn btn-sqr d-block">Thanh Toán</a>
                                 </div>
                                 @endif
                         </div>
