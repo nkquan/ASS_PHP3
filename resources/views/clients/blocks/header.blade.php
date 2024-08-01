@@ -38,6 +38,7 @@
                                                 @endforeach
                                             </ul>
                                         </li>
+                                        <li class="{{ request()->is('baiviet') ? 'active' : '' }}"><a href="{{ route('home.baiviet') }}">Bài viết</a></li>
                                         <li><a href="contact-us.html">Liên hệ</a></li>
                                     </ul>
                                 </nav>

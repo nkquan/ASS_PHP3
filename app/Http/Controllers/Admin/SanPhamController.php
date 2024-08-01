@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\DanhMuc;
 use App\Models\SanPham;
+use App\Models\BinhLuan;
 use Illuminate\Http\Request;
 use App\Models\HinhAnhSanPham;
 use App\Http\Controllers\Controller;
@@ -70,7 +71,8 @@ class SanPhamController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $binhLuans = BinhLuan::where('san_pham_id', $id)->paginate(15);
+        return view('admins.sanphams.binhluan', compact('binhLuans'));
     }
 
     /**
@@ -162,6 +164,7 @@ class SanPhamController extends Controller
             Storage::disk('public')->deleteDirectory($path);
         }
 
+        BinhLuan::where('san_pham_id', $id)->delete();
         $sanPham->hinhAnhSanPham()->delete();
         $sanPham->delete();
         return redirect()->route('sanphams.index')->with('success', 'Xóa sản phẩm thành công');

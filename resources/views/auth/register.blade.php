@@ -13,14 +13,14 @@
                                 @csrf
                                 <div class="single-input-item">
                                     <input type="text" class="@error('ho_ten') is-invalid @enderror" name="ho_ten"
-                                        value="{{ old('ho_ten') }}" placeholder="Full Name" />
+                                        value="{{ old('ho_ten') }}" placeholder="Họ và tên" />
                                     @error('ho_ten')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="single-input-item">
                                     <input type="email" class="@error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}" placeholder="Enter your Email" />
+                                        value="{{ old('email') }}" placeholder="Email" />
                                     @error('email')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -29,7 +29,7 @@
                                     <div class="col-lg-6">
                                         <div class="single-input-item">
                                             <input type="password" class="@error('passowrd') is-invalid @enderror"
-                                                name="password" placeholder="Enter your Password" />
+                                                name="password" placeholder="Mật khẩu" />
                                             @error('passowrd')
                                                 <p class="text-danger">{{ $message }}</p>
                                             @enderror
@@ -38,7 +38,7 @@
                                     <div class="col-lg-6">
                                         <div class="single-input-item">
                                             <input type="password" class="@error('confirmpassword') is-invalid @enderror"
-                                                name="confirmpassword" placeholder="Repeat your Password" />
+                                                name="confirmpassword" placeholder="Nhập lại mật khẩu" />
                                             @error('confirmpassowrd')
                                                 <p class="text-danger">{{ $message }}</p>
                                             @enderror

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ChucVu;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ChucVuController extends Controller
@@ -13,7 +14,7 @@ class ChucVuController extends Controller
      */
     public function index()
     { {
-            $chucvus = ChucVu::paginate(5);
+            $chucvus = ChucVu::where('id', '<>', 1)->paginate(5);
             return view('admins.chucvus.index', compact('chucvus'));
         }
     }
@@ -75,10 +76,13 @@ class ChucVuController extends Controller
      */
     public function destroy(string $id)
     {
-        $chucvus = ChucVu::findOrFail($id);
+        // $chucvus = ChucVu::findOrFail($id);
+        // foreach($chucvus->user as $value) {
+        //     User::where('chuc_vu_id', $value->id)->delete();
+        // }
 
-        $chucvus->delete();
+        // $chucvus->delete();
 
-        return redirect()->route('chucvus.index')->with('success', 'Xoá thành công');
+        // return redirect()->route('chucvus.index')->with('success', 'Xoá thành công');
     }
 }

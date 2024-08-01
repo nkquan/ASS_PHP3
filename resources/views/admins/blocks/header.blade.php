@@ -4,8 +4,7 @@
             <div class="col-md-4 px-0 px-md-6 order-1 order-md-0">
                 <form>
                     <div class="input-group position-relative bg-input rounded">
-                        <input type="text" class="form-control border-1 pl-4 shadow-none"
-                            placeholder="Search Item">
+                        <input type="text" class="form-control border-1 pl-4 shadow-none" placeholder="Search Item">
                         <div class="input-group-append fs-14">
                             <button
                                 class="btn btn-hover-bg-primary btn-hover-border-primary rounded-0 rounded-end border-start border-0 h-100 px-8 py-5">
@@ -15,20 +14,18 @@
                     </div>
                 </form>
             </div>
-            <div
-                class="col-md-6 d-flex flex-wrap justify-content-md-end align-items-center order-0 order-md-1">
+            <div class="col-md-6 d-flex flex-wrap justify-content-md-end align-items-center order-0 order-md-1">
                 <div class="color-modes position-relative pe-4">
                     <a class="bd-theme btn btn-link nav-link dropdown-toggle d-inline-flex align-items-center justify-content-center text-primary p-0 position-relative rounded-circle"
-                        href="#" aria-expanded="true" data-bs-toggle="dropdown"
-                        data-bs-display="static" aria-label="Toggle theme (light)">
+                        href="#" aria-expanded="true" data-bs-toggle="dropdown" data-bs-display="static"
+                        aria-label="Toggle theme (light)">
                         <svg class="bi my-1 theme-icon-active">
                             <use href="#sun-fill"></use>
                         </svg>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end fs-14px" data-bs-popper="static">
                         <li>
-                            <button type="button"
-                                class="dropdown-item d-flex align-items-center active"
+                            <button type="button" class="dropdown-item d-flex align-items-center active"
                                 data-bs-theme-value="light" aria-pressed="true">
                                 <svg class="bi me-4 opacity-50 theme-icon">
                                     <use href="#sun-fill"></use>
@@ -78,8 +75,7 @@
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                 </div>
-                <a href="#" class="request-full-screen d-block px-4 mx-3 fs-5"
-                    title="Full screen">
+                <a href="#" class="request-full-screen d-block px-4 mx-3 fs-5" title="Full screen">
                     <i class="far fa-rss-square"></i>
                 </a>
                 <div class="dropdown px-4 mx-3 py-2 dropdown-language">
@@ -104,12 +100,15 @@
                     <a href="#"
                         class="dropdown-toggle text-heading pr-3 pr-sm-6 d-flex align-items-center justify-content-end"
                         data-bs-toggle="dropdown">
-                        <img src="{{ asset('assets/admin') }}/images/dashboard/avatar-2.png"
-                            alt="Ronald Hunter" class="rounded-circle" width="40">
+                        <img src="{{ asset('assets/admin') }}/images/dashboard/avatar-2.png" alt="Ronald Hunter"
+                            class="rounded-circle" width="40">
                     </a>
                     <div class="dropdown-menu dropdown-menu-end w-100">
-                        <a class="dropdown-item" href="#">My Profile</a>
-                        <a class="dropdown-item" href="#">Logout</a>
+                        <a class="btn btn-border-1" href="{{ route('home.index') }}">Về trang chủ</a>
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <button class="btn btn-border-1" type="submit">Đăng xuất</button>
+                        </form>
                     </div>
                 </div>
             </div>
