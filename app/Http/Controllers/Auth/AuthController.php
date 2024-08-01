@@ -36,7 +36,7 @@ class AuthController extends Controller
                 }
                 return redirect()->route('home.index');
             } else {
-                return redirect()->route('login');
+                return redirect()->route('login')->with('error', 'Tài khoản hoặc mật khẩu không chính xác');
             }
         }
     }

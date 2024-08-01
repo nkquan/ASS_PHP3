@@ -1,16 +1,19 @@
 <?php
 
+use App\Http\Controllers\Admin\BaiVietController;
 use App\Models\SanPham;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\ChucVuController;
+use App\Http\Controllers\Admin\DanhMucBaiVietController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\DanhMucController;
 use App\Http\Controllers\Admin\SanPhamController;
 use App\Http\Controllers\Admin\TaiKhoanController;
 use App\Http\Controllers\Client\AccountController;
+use App\Http\Controllers\Client\HomeBaiVietController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +32,10 @@ Route::get('product/{id}', [HomeController::class,'sanPhamDetail'])->name('home.
 Route::get('product/category/{id}', [HomeController::class,'sanPhamDanhMuc'])->name('home.category');
 Route::post('product/comment/{id}', [HomeController::class,'postComment'])->name('home.comment');
 Route::delete('product/comment/{id}', [HomeController::class,'deleteBinhLuan'])->name('home.deleteBL');
+
+Route::get('baiviet', [HomeBaiVietController::class, 'index'])->name('home.baiviet');
+Route::get('baiviet/{id}', [HomeBaiVietController::class, 'baiVietChiTiet'])->name('home.baivietchitiet');
+Route::get('baiviet/danhmuc/{id}', [HomeBaiVietController::class, 'baivietdanhmuc'])->name('home.baivietdanhmuc');
 
 Route::get('account', [AccountController::class, 'showAccount'])->name('home.account');
 Route::put('account/{id}', [AccountController::class, 'editAccount'])->name('home.editAccount');
@@ -53,5 +60,7 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admin')->group(function () {
     Route::resource('sanphams', SanPhamController::class);
     Route::resource('chucvus', ChucVuController::class);
     Route::resource('taikhoans', TaiKhoanController::class);
+    Route::resource('baiviets', BaiVietController::class);
+    Route::resource('danhmucbaiviets', DanhMucBaiVietController::class);
 });
 

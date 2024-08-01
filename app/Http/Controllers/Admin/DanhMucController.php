@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\DanhMuc;
+use App\Models\SanPham;
+use App\Models\BinhLuan;
 use Illuminate\Http\Request;
+use App\Models\HinhAnhSanPham;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DanhMucRequest;
 use Illuminate\Support\Facades\Storage;
@@ -95,6 +98,18 @@ class DanhMucController extends Controller
     public function destroy(string $id)
     {
         $danhMuc = DanhMuc::findOrFail($id);
+        foreach ($danhMuc->sanPham as $value) {
+            BinhLuan::where('san_pham_id', $value->id)->delete();
+            HinhAnhSanPham::where('san_pham_id', $value->id)->delete();
+            $path = 'uploads/hinhanhsanpham/id_' . $value->id;
+            if (Storage::disk('public')->exists($path)) {
+                Storage::disk('public')->deleteDirectory($path);
+            }
+            if ($value->hinh_anh && Storage::disk('public')->exists($value->hinh_anh)) {
+                Storage::disk('public')->delete($value->hinh_anh);
+            }
+        }
+        $danhMuc->sanPham()->Delete();
         $danhMuc->delete();
 
         if ($danhMuc->hinh_anh && Storage::disk('public')->exists($danhMuc->hinh_anh)) {

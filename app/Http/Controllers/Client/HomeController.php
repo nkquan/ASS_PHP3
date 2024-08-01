@@ -26,7 +26,7 @@ class HomeController extends Controller
             ['danh_muc_id', $sanPham->danh_muc_id],
             ['id', '<>', $id]
         ])->get();
-        $binhLuans = BinhLuan::get();
+        $binhLuans = BinhLuan::where('san_pham_id', $id)->get();
         $sanPham->update([
             'luot_xem' => $sanPham->luot_xem + 1,
         ]);
