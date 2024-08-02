@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\DonHangController;
+use App\Http\Controllers\Client\OrderController;
 use App\Models\SanPham;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
@@ -44,6 +46,7 @@ Route::post('register', [AuthController::class, 'register'])->name('register');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 
+
 Route::middleware(['auth', 'auth.admin'])->prefix('admin')->group(function () {
     Route::get('dashboard', function () {
         return view('admins.dashboard');
@@ -53,5 +56,16 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admin')->group(function () {
     Route::resource('sanphams', SanPhamController::class);
     Route::resource('chucvus', ChucVuController::class);
     Route::resource('taikhoans', TaiKhoanController::class);
+    Route::resource('quanlydonhangs', DonHangController::class);
 });
+
+
+Route::middleware(['auth'])->prefix('donhangs')->group(function () {
+    Route::get('/', [OrderController::class, 'index'])->name('donhangs.index');
+    Route::get('/create', [OrderController::class, 'create'])->name('donhangs.create');
+    Route::post('/store', [OrderController::class, 'store'])->name('donhangs.store');
+    Route::get('/show/{id}', [OrderController::class, 'show'])->name('donhangs.show');
+    Route::post('{id}/update', [OrderController::class, 'update'])->name('donhangs.update');
+});
+
 

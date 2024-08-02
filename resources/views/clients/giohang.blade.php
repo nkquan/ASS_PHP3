@@ -29,6 +29,12 @@
         <div class="cart-main-wrapper section-padding">
             <div class="container">
                 <div class="section-bg-color">
+                    @if (session('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('error') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                        </div>
+                    @endif
                     <div class="row">
                         <div class="col-lg-12">
                             <form action="{{ route('cart.update') }}" method="POST">
@@ -101,7 +107,7 @@
                     <div class="row">
                         <div class="col-lg-5 ml-auto">
                             <!-- Cart Calculation Area -->
-                            @if(!empty($item['gia']))
+                            @if (!empty($item['gia']))
                                 <div class="cart-calculator-wrapper">
                                     <div class="cart-calculate-items">
                                         <h6>Đơn hàng</h6>
@@ -127,9 +133,9 @@
                                             </table>
                                         </div>
                                     </div>
-                                    <a href="checkout.html" class="btn btn-sqr d-block">Thanh Toán</a>
+                                    <a href="{{ route('donhangs.create') }}" class="btn btn-sqr d-block">Thanh Toán</a>
                                 </div>
-                                @endif
+                            @endif
                         </div>
                     </div>
                 </div>
