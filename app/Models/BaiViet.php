@@ -13,6 +13,7 @@ class BaiViet extends Model
         'noi_dung',
         'bai_viet_id',
         'tieu_de',
+        'hinh_anh',
     ];
 
     public function danhMucBaiViet () {

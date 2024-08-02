@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('bai_viets', function (Blueprint $table) {
             $table->increments('id');
             $table->string('tieu_de');
+            $table->string('hinh_anh')->nullable();
             $table->text('noi_dung');
             $table->unsignedInteger('bai_viet_id');
             $table->timestamps();

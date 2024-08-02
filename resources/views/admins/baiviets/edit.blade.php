@@ -53,6 +53,12 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3">
+                                        <label for="hinh_anh" class="form-label">Hình Ảnh</label>
+                                        <input type="file" id="hinh_anh" name="hinh_anh" class="form-control"
+                                            onchange="showImage(event)">
+                                        <img id="img_danh_slider" src="{{ Storage::Url($baiViet->hinh_anh) }}" alt="hình ảnh sản phẩm" width="100">
+                                    </div>
+                                    <div class="mb-3">
                                         <label class="form-label" for="noi_dung">Nội dung</label>
                                         <div id="quill-editor" style="height: 400px;">
                                         </div>
