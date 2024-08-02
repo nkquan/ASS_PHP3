@@ -24,6 +24,7 @@ return new class extends Migration
             $table->unsignedInteger('chuc_vu_id')->default(2);
             $table->boolean('trang_thai')->default(0);
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('chuc_vu_id')->references('id')->on('chuc_vus');
         });
     }

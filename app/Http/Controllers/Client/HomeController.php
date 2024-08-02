@@ -9,6 +9,7 @@ use App\Models\SanPham;
 use App\Models\BinhLuan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\BaiViet;
 
 class HomeController extends Controller
 {
@@ -17,7 +18,8 @@ class HomeController extends Controller
         $sanPhams = SanPham::get();
         $sanPhamYeuThich = SanPham::where('luot_xem', '>', 2)->get();
         $danhMuc = DanhMuc::get();
-        return view('clients.home', compact('slider', 'sanPhams', 'sanPhamYeuThich', 'danhMuc'));
+        $baiViets = BaiViet::get();
+        return view('clients.home', compact('slider', 'sanPhams', 'sanPhamYeuThich', 'danhMuc', 'baiViets'));
     }
 
     public function sanPhamDetail (string $id) {
@@ -26,7 +28,7 @@ class HomeController extends Controller
             ['danh_muc_id', $sanPham->danh_muc_id],
             ['id', '<>', $id]
         ])->get();
-        $binhLuans = BinhLuan::get();
+        $binhLuans = BinhLuan::where('san_pham_id', $id)->get();
         $sanPham->update([
             'luot_xem' => $sanPham->luot_xem + 1,
         ]);

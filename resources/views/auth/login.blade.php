@@ -9,16 +9,25 @@
                     <div>
                         <div class="login-reg-form-wrap">
                             <h5>Đăng nhập</h5>
+                            @if (session('error'))
+                                <div class="alert alert-danger alert-dismissible fade show container mt-2" role="alert">
+                                    {{ session('error') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="close"></button>
+                                </div>
+                            @endif
                             <form action="{{ route('login') }}" method="post">
                                 @csrf
                                 <div class="single-input-item">
-                                    <input type="email" class="@error('email') is-invalid @enderror" name="email" placeholder="Email or Username" />
+                                    <input type="email" class="@error('email') is-invalid @enderror" name="email"
+                                        placeholder="Email" value="{{ old('email') }}"/>
                                     @error('email')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="single-input-item">
-                                    <input type="password" class="@error('password') is-invalid @enderror" name="password" placeholder="Enter your Password" />
+                                    <input type="password" class="@error('password') is-invalid @enderror" name="password"
+                                        placeholder="Mật khẩu" />
                                     @error('password')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror

@@ -9,7 +9,7 @@
                 <h2 class="fs-4 mb-0">Danh Sách Tài Khoản</h2>
             </div>
             <div class="col-md-6 d-flex flex-wrap justify-content-md-end">
-                <a href="" class="btn btn-primary">Thêm Chức vụ</a>
+                <a href="{{ route('taikhoans.create') }}" class="btn btn-primary">Thêm tài khoản</a>
             </div>
         </div>
         <div class="card mb-4 rounded-4 p-7">
@@ -55,6 +55,7 @@
                                 <th>Hình ảnh</th>
                                 <th>Chức vụ</th>
                                 <th>Email</th>
+                                <th>Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -68,9 +69,6 @@
                                     <td>{{ $item->chucVu->ten_chuc_vu }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>
-                                        <a href=""
-                                            class="btn btn-primary py-4 px-5 btn-xs fs-13px me-4"><i
-                                                class="far fa-pen me-2"></i> Sửa</a>
                                         <form action="{{ route('taikhoans.destroy', $item->id) }}" method="POST"
                                             class="d-inline" onsubmit="return confirm('Bạn có muốn xóa không')">
                                             @csrf

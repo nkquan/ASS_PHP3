@@ -169,6 +169,23 @@
                                 <i class="fa-solid fa-sliders"></i>
                             </span>
                             <span class="sidebar-item-text fs-14px fw-semibold">Đơn Hàng</span>
+                        <a href="{{ route('danhmucbaiviets.index') }}"
+                            class="text-heading text-decoration-none lh-1 d-flex sidebar-link align-items-center py-5 px-6 position-relative"
+                            title="Account">
+                            <span class="sidebar-item-icon d-inline-block w-40px text-muted">
+                                <i class="fa-solid fa-layer-group"></i>
+                            </span>
+                            <span class="sidebar-item-text fs-14px fw-semibold">Danh mục bài viết</span>
+                        </a>
+                    </li>
+                    <li class="list-group-item px-0 py-0 sidebar-item mb-3 has-children border-0">
+                        <a href="{{ route('baiviets.index') }}"
+                            class="text-heading text-decoration-none lh-1 d-flex sidebar-link align-items-center py-5 px-6 position-relative"
+                            title="Account">
+                            <span class="sidebar-item-icon d-inline-block w-40px text-muted">
+                                <i class="fa-solid fa-book"></i>
+                            </span>
+                            <span class="sidebar-item-text fs-14px fw-semibold">Bài viết</span>
                         </a>
                     </li>
                 </ul>

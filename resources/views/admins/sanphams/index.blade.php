@@ -70,8 +70,8 @@
                                     <td>
                                         <img src="{{ Storage::Url($item->hinh_anh) }}" alt="" width="100px">
                                     </td>
-                                    <td>{{number_format( $item->gia_san_pham) }}</td>
-                                    <td>{{empty($item->gia_khuyen_mai)? 0 : number_format($item->gia_khuyen_mai) }}</td>
+                                    <td>{{ number_format($item->gia_san_pham) }}</td>
+                                    <td>{{ empty($item->gia_khuyen_mai) ? 0 : number_format($item->gia_khuyen_mai) }}</td>
                                     <td>{{ $item->so_luong }}</td>
                                     <td class="{{ $item->trang_thai == 1 ? 'text-success' : 'text-danger' }}">
                                         {{ $item->trang_thai == 1 ? 'Hiển thị' : 'Ẩn' }}
@@ -80,11 +80,14 @@
                                         <a href="{{ route('sanphams.edit', $item->id) }}"
                                             class="btn btn-primary py-4 px-5 btn-xs fs-13px me-4"><i
                                                 class="far fa-pen me-2"></i> Sửa</a>
+                                        <a href="{{ route('sanphams.show', $item->id) }}"
+                                            class="btn btn-warning py-4 px-5 btn-xs fs-13px me-4"><i
+                                                class="fa-solid fa-eye"></i> Bình luận</a>
                                         <form action="{{ route('sanphams.destroy', $item->id) }}" method="POST"
                                             class="d-inline" onsubmit="return confirm('Bạn có muốn xóa không')">
                                             @csrf
                                             @method('DELETE')
-                                            <button 
+                                            <button
                                                 class="btn btn-outline-primary btn-hover-bg-danger btn-hover-border-danger btn-hover-text-light py-4 px-5 fs-13px btn-xs me-4"><i
                                                     class="far fa-trash me-2"></i> Xóa</button>
                                         </form>
