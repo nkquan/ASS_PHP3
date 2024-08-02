@@ -37,7 +37,8 @@
                                 <h5 class="title">Danh Mục</h5>
                                 <ul class="blog-archive blog-category">
                                     @foreach ($danhMuc as $item)
-                                        <li><a href="{{ route('home.baivietdanhmuc', $item->id) }}">{{ $item->ten_danh_muc }} ({{ count($item->baiViet) }})</a></li>
+                                        <li><a href="{{ route('home.baivietdanhmuc', $item->id) }}">{{ $item->ten_danh_muc }}
+                                                ({{ count($item->baiViet) }})</a></li>
                                     @endforeach
                                 </ul>
                             </div> <!-- single sidebar end -->
@@ -50,14 +51,23 @@
                                 @foreach ($baiViets as $item)
                                     <div class="col-md-6">
                                         <!-- blog post item start -->
+
                                         <div class="blog-post-item mb-30">
-                                            <div class="blog-content">
-                                                <h4 class="blog-title">
-                                                    <a href="{{ route('home.baivietchitiet', $item->id) }}">{{ $item->tieu_de }}</a>
-                                                </h4><small>{{ $item->created_at }}</small>
+                                            <figure class="blog-thumb">
+                                                <a href="blog-details.html">
+                                                    <img src="{{ Storage::url($item->hinh_anh) }}" alt="blog image">
+                                                </a>
+                                            </figure>
+                                            <div class="blog-post-item mb-30">
+                                                <div class="blog-content">
+                                                    <h4 class="blog-title">
+                                                        <a
+                                                            href="{{ route('home.baivietchitiet', $item->id) }}">{{ $item->tieu_de }}</a>
+                                                    </h4><small>{{ $item->created_at }}</small>
+                                                </div>
                                             </div>
+                                            <!-- blog post item end -->
                                         </div>
-                                        <!-- blog post item end -->
                                     </div>
                                 @endforeach
 

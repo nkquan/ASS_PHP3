@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\BaiViet;
-use App\Models\DanhMucBaiViet;
 use Illuminate\Http\Request;
+use App\Models\DanhMucBaiViet;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class DanhMucBaiVietController extends Controller
 {
@@ -77,6 +78,12 @@ class DanhMucBaiVietController extends Controller
     public function destroy(string $id)
     {
         $danhMuc = DanhMucBaiViet::findOrFail($id);
+
+        foreach ($danhMuc->baiViet as $value) {
+            if ($value->hinh_anh && Storage::disk('public')->exists($value->hinh_anh)) {
+                Storage::disk('public')->delete($value->hinh_anh);
+            }
+        }
 
         $danhMuc->baiViet()->delete();
         $danhMuc->delete();

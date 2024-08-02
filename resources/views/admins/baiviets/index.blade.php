@@ -26,6 +26,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Tiêu đề</th>
+                                <th>Hình ảnh</th>
                                 <th>Tên danh mục</th>
                                 <th>Hành Động</th>
                             </tr>
@@ -35,6 +36,9 @@
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $item->tieu_de }}</td>
+                                    <td>
+                                        <img src="{{ Storage::Url($item->hinh_anh) }}" alt="" width="50">
+                                    </td>
                                     <td>{{ $item->danhMucBaiViet->ten_danh_muc }}</td>
                                     <td>
                                         <a href="{{ route('baiviets.edit', $item->id) }}"

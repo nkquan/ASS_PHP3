@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\BaiViet;
-use App\Models\DanhMucBaiViet;
 use Illuminate\Http\Request;
+use App\Models\DanhMucBaiViet;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class BaiVietController extends Controller
 {
@@ -33,6 +34,13 @@ class BaiVietController extends Controller
     {
         if ($request->isMethod('POST')) {
             $param = $request->except('_token');
+            
+            if ($request->hasFile('hinh_anh')) {
+                $filepath = $request->file('hinh_anh')->store('uploads/baiviets', 'public');
+            } else {
+                $filepath = null;
+            }
+            $param['hinh_anh'] = $filepath;
 
             BaiViet::create($param);
             return redirect()->route('baiviets.index')->with('success', 'Thêm sản phẩm thành công');
@@ -69,6 +77,16 @@ class BaiVietController extends Controller
 
             $baiViet = BaiViet::query()->findOrFail($id);
 
+            if ($request->hasFile('hinh_anh')) {
+                if ($baiViet->hinh_anh && Storage::disk('public')->exists($baiViet->hinh_anh)) {
+                    Storage::disk('public')->delete($baiViet->hinh_anh);
+                }
+                $filepath = $request->file('hinh_anh')->store('uploads/slider', 'public');
+            } else {
+                $filepath = $baiViet->hinh_anh;
+            }
+            $param['hinh_anh'] = $filepath;
+
             $baiViet->update($param);
         }
         return redirect()->route('baiviets.index')->with('success', 'Cập nhật sản phẩm thành công');
@@ -80,6 +98,10 @@ class BaiVietController extends Controller
     public function destroy(string $id)
     {
         $baiViet = BaiViet::query()->findOrFail($id);
+
+        if ($baiViet->hinh_anh && Storage::disk('public')->exists($baiViet->hinh_anh)) {
+            Storage::disk('public')->delete($baiViet->hinh_anh);
+        }
 
         $baiViet->delete();
 

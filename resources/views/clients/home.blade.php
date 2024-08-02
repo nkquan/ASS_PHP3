@@ -66,8 +66,7 @@
                                             <div class="product-item">
                                                 <figure class="product-thumb">
                                                     <a href="{{ route('home.detail', $item->id) }}">
-                                                        <img src="{{ Storage::url($item->hinh_anh) }}"
-                                                            alt="product">
+                                                        <img src="{{ Storage::url($item->hinh_anh) }}" alt="product">
                                                         {{-- <img class="sec-img"
                                                             src="{{ asset('assets/client') }}/img/product/product-18.jpg"
                                                             alt="product"> --}}
@@ -92,7 +91,7 @@
                                                                 data-bs-placement="left" title="Quick View"><i
                                                                     class="pe-7s-search"></i></span></a>
                                                     </div>
-                                                    <form action="{{ route('cart.add')}}" method="POST">
+                                                    <form action="{{ route('cart.add') }}" method="POST">
                                                         @csrf
                                                         <input type="hidden" name="quantity" value="1">
                                                         <input type="hidden" name="product_id" value="{{ $item->id }}">
@@ -202,8 +201,7 @@
                                 <div class="product-item">
                                     <figure class="product-thumb">
                                         <a href="{{ route('home.detail', $item->id) }}">
-                                            <img src="{{ Storage::url($item->hinh_anh) }}"
-                                                alt="product">
+                                            <img src="{{ Storage::url($item->hinh_anh) }}" alt="product">
                                             {{-- <img class="sec-img"
                                                 src="{{ asset('assets/client') }}/img/product/product-13.jpg"
                                                 alt="product"> --}}
@@ -225,7 +223,7 @@
                                                     data-bs-toggle="tooltip" data-bs-placement="left"
                                                     title="Quick View"><i class="pe-7s-search"></i></span></a>
                                         </div>
-                                        <form action="{{ route('cart.add')}}" method="POST">
+                                        <form action="{{ route('cart.add') }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="quantity" value="1">
                                             <input type="hidden" name="product_id" value="{{ $item->id }}">
@@ -239,8 +237,10 @@
                                             <a href="{{ route('home.detail', $item->id) }}">{{ $item->ten_san_pham }}</a>
                                         </h6>
                                         <div class="price-box">
-                                            <span class="price-regular">{{ $item->gia_khuyen_mai ? number_format($item->gia_khuyen_mai, 0, '', '.') : '' }}<sup>đ</sup></span>
-                                            <span class="price-old"><del>{{ number_format($item->gia_san_pham, 0, '', '.') }}<sup>đ</sup></del></span>
+                                            <span
+                                                class="price-regular">{{ $item->gia_khuyen_mai ? number_format($item->gia_khuyen_mai, 0, '', '.') : '' }}<sup>đ</sup></span>
+                                            <span
+                                                class="price-old"><del>{{ number_format($item->gia_san_pham, 0, '', '.') }}<sup>đ</sup></del></span>
                                         </div>
                                     </div>
                                 </div>
@@ -663,10 +663,18 @@
                             <!-- blog post item start -->
                             @foreach ($baiViets as $item)
                                 <div class="blog-post-item">
-                                    <div class="blog-content">
-                                        <h4 class="blog-title">
-                                            <a href="{{ route('home.baivietchitiet', $item->id) }}">{{ $item->tieu_de }}</a>
-                                        </h4><small>{{ $item->created_at }}</small>
+                                    <div class="blog-post-item mb-30">
+                                        <figure class="blog-thumb">
+                                            <a href="blog-details.html">
+                                                <img src="{{ Storage::url($item->hinh_anh) }}" alt="blog image">
+                                            </a>
+                                        </figure>
+                                        <div class="blog-content">
+                                            <h4 class="blog-title">
+                                                <a
+                                                    href="{{ route('home.baivietchitiet', $item->id) }}">{{ $item->tieu_de }}</a>
+                                            </h4><small>{{ $item->created_at }}</small>
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
