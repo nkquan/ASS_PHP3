@@ -69,6 +69,7 @@
                                         <ul class="dropdown-list">
                                             @if (auth()->user())
                                                 <li><a href="{{ route('home.account') }}">my account</a></li>
+                                                <li><a href="{{ route('donhangs.index') }}">my order</a></li>
                                                 <li>
                                                     <form action="{{ route('logout') }}" method="post">
                                                         @csrf
