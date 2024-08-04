@@ -18,7 +18,7 @@ class DonHangController extends Controller
         $trangThaiDonHang = DonHang::TRANG_THAI_DON_HANG;
 
         $type_huy_don_hang = DonHang::HUY_DON_HANG;
-        return view('admins.donhangs.index', compact('listDonHang','trangThaiDonHang'));
+        return view('admins.donhangs.index', compact('listDonHang','trangThaiDonHang','type_huy_don_hang'));
     }
 
     
@@ -53,10 +53,10 @@ class DonHangController extends Controller
         if($currentTrangThai === DonHang::HUY_DON_HANG){
             return redirect()->route('quanlydonhangs.index')->with('error','Đơn hàng đã bị hủy không thể thay đổi trạng thái');
         }
-        if(array_search($newTrangThai,$trangThais) < array_search($newTrangThai,$trangThais)){
+        if(array_search($newTrangThai,$trangThais) < array_search($currentTrangThai,$trangThais)){
             return redirect()->route('quanlydonhangs.index')->with('error','Không thể cập nhật ngược lại trạng thái');
         }
-        $donHang->trang_thai_don_hang =   $newTrangThai;
+        $donHang->trang_thai_don_hang = $newTrangThai;
 
         $donHang->save();
 

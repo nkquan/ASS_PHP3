@@ -80,32 +80,31 @@
                                             @csrf
                                             @method('PUT')
                                             <select name="trang_thai_don_hang" class="form-select w-75"
-                                            onchange="confirmSubmit(this)"
-                                            data-default-value="{{$item->trang_thai_don_hang}}"
-                                            >
+                                                onchange="confirmSubmit(this)"
+                                                data-default-value="{{ $item->trang_thai_don_hang }}">
                                                 @foreach ($trangThaiDonHang as $key => $value)
                                                     <option value="{{ $key }}"
-                                                        {{$key == $item->trang_thai_don_hang ? 'selected' : '' }}
-                                                        {{$key == 'huy_don_hang' ? 'disabled' : ''}}>
+                                                        {{ $key == $item->trang_thai_don_hang ? 'selected' : '' }}
+                                                        {{ $key == $type_huy_don_hang ? 'disabled' : '' }}>
                                                         {{ $value }}</option>
                                                 @endforeach
                                             </select>
                                         </form>
                                     </td>
                                     <td>
-                                        <a href="quanlydonhangs.show"
+                                        <a href="{{ route('quanlydonhangs.show', $item->id)}}"
                                             class="btn btn-outline-primary btn-hover-bg-danger btn-hover-border-danger btn-hover-text-light py-4 px-5 fs-13px btn-xs me-4">
                                             <i class="far fa-eye me-2"></i>
                                         </a>
-                                        @if ($item->trang_thai_don_hang === 'huy_don_hang')
-                                        <form action="{{ route('quanlydonhangs.destroy', $item->id) }}" method="POST"
-                                            class="d-inline" onsubmit="return confirm('Bạn có muốn xóa không')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button
-                                                class="btn btn-outline-primary btn-hover-bg-danger btn-hover-border-danger btn-hover-text-light py-4 px-5 fs-13px btn-xs me-4"><i
-                                                    class="far fa-trash me-2"></i> Xóa</button>
-                                        </form>
+                                        @if ($item->trang_thai_don_hang === $type_huy_don_hang)
+                                            <form action="{{ route('quanlydonhangs.destroy', $item->id) }}" method="POST"
+                                                class="d-inline" onsubmit="return confirm('Bạn có muốn xóa không')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button
+                                                    class="btn btn-outline-primary btn-hover-bg-danger btn-hover-border-danger btn-hover-text-light py-4 px-5 fs-13px btn-xs me-4"><i
+                                                        class="far fa-trash me-2"></i> Xóa</button>
+                                            </form>
                                         @endif
                                     </td>
                                 </tr>
@@ -127,9 +126,9 @@
             var selectedOption = selectElement.options[selectElement.selectedIndex].text;
             var defaultValue = selectElement.getAttribute('data-default-value');
 
-            if(confirm('Bạn có chắc chắn thay đổi trạng thái đơn hàng thành "' + selectedOption + '" không?')){
+            if (confirm('Bạn có chắc chắn thay đổi trạng thái đơn hàng thành "' + selectedOption + '" không?')) {
                 form.submit()
-            }else{
+            } else {
                 selectElement.value = defaultValue;
             }
 

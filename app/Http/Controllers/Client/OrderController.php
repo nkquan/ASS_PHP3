@@ -18,10 +18,15 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $donHangs = Auth::user()->donHang;
+        // $donHangs = Auth::user()->donHang;
+        $donHangs = DonHang::where('tai_khoan_id', Auth::user()->id)->get();
 
         $trangThaiDonHang = DonHang::TRANG_THAI_DON_HANG;
-        return view('clients.donhangs.index',compact('donHangs',' trangThaiDonHang'));
+
+        $type_cho_xac_nhan = DonHang::CHO_XAC_NHAN;
+
+        $type_dang_van_chuyen = DonHang::DANG_VAN_CHUYEN;
+        return view('clients.donhangs.index', compact('donHangs', 'trangThaiDonHang','type_cho_xac_nhan','type_dang_van_chuyen'));
     }
 
     /**
@@ -60,12 +65,12 @@ class OrderController extends Controller
 
                 $donHang = DonHang::query()->create($params);
                 $donHangId = $donHang->id;
-                
+
                 $carts = session()->get('cart', []);
-                
+
                 foreach ($carts as $key => $item) {
                     $thanhTien = $item['gia'] * $item['so_luong'];
-                    
+
                     $donHang->chiTietDonHang()->create([
                         'don_hang_id' => $donHangId,
                         'san_pham_id' => $key,
@@ -74,8 +79,8 @@ class OrderController extends Controller
                         'thanh_tien' => $thanhTien
                     ]);
                 }
-                
-                
+
+
                 DB::commit();
 
                 Mail::to($donHang->email_nguoi_nhan)->queue(new OrderConfirm($donHang));
@@ -96,15 +101,13 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        //
-    }
+        $donHang = DonHang::query()->findOrFail($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        $trangThaiDonHang = DonHang::TRANG_THAI_DON_HANG;
+
+        $trangThaiThanhToan = DonHang::TRANG_THAI_THANH_TOAN;
+
+        return view('clients.donhangs.show', compact('donHang', 'trangThaiDonHang', 'trangThaiThanhToan'));
     }
 
     /**
@@ -112,7 +115,22 @@ class OrderController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $donHang = DonHang::query()->findOrFail($id);
+        
+        DB::beginTransaction();
+
+        try{
+            if($request->has('huy_don_hang')){
+                $donHang->update(['trang_thai_don_hang' =>DonHang::HUY_DON_HANG]);
+            }else{
+                $donHang->update(['trang_thai_don_hang' =>DonHang::DA_GIAO_HANG]);
+            }
+
+            DB::commit();
+        }catch(\Exception $e){
+            DB::rollBack();
+        }
+        return redirect()->back();
     }
 
     /**
