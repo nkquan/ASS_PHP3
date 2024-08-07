@@ -25,13 +25,13 @@
                             </thead>
                             <tbody>
                                 <td>
-                                    {{-- <ul>
+                                    <ul>
                                         <li>Tên tài khoản: <b>{{ $donHang->user->ho_ten}}</b>
                                         <li>Email: <b>{{ $donHang->user->email}}</b>
                                         <li>SĐT: <b>{{ $donHang->user->so_dien_thoai}}</b>
                                         <li>Địa chỉ: <b>{{ $donHang->user->dia_chi}}</b>
                                         <li>Tài Khoản: <b>{{ $donHang->user->chuc_vu_id}}</b>
-                                    </ul> --}}
+                                    </ul>
                                 </td>
                                 <td>
                                     <ul>
