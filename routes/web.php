@@ -74,7 +74,7 @@ Route::middleware(['auth'])->prefix('donhangs')->group(function () {
     Route::get('/create', [OrderController::class, 'create'])->name('donhangs.create');
     Route::post('/store', [OrderController::class, 'store'])->name('donhangs.store');
     Route::get('/show/{id}', [OrderController::class, 'show'])->name('donhangs.show');
-    Route::post('{id}/update', [OrderController::class, 'update'])->name('donhangs.update');
+    Route::put('{id}/update', [OrderController::class, 'update'])->name('donhangs.update');
 });
 
 
